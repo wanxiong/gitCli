@@ -175,7 +175,8 @@ const push = async (action, ...params) => {
         ]
     }])
     // 推送远程
-    if (gitAddType.addType !== gitPushStr) {
+    if (gitAddType.pushType !== gitPushStr) {
+        console.log('自定义')
         // 默认添加 执行添加
         execSync(gitPushType.pushType) 
         return
@@ -185,6 +186,7 @@ const push = async (action, ...params) => {
             name: 'cusPush',
             message: '请输入git命令将文件推送到远程具体分支',
         }])
+        console.log('非自定义', customCommit.cusPush)
         execSync(customCommit.cusPush)
     }
 }
