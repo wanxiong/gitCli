@@ -153,12 +153,12 @@ const push = async (action, ...params) => {
         ]
     }])
     if (gitAddType.addType === gitAddStr) {
-         // 默认添加 执行添加
-         execSync(gitAddType.addType)
+        // 默认添加 执行添加
+        execSync(gitAddType.addType)
         // 获取commit文案
-        execSync(`git commit -m ${completeText}`)
+        execSync(`git commit -m "${completeText}"`)
         // 提交文案
-        // execSync(`git push`) 
+        execSync(`git push`) 
     } else {
         let customCommit = await inquirer.prompt([{
             type: 'input', 
