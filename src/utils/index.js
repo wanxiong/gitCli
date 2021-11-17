@@ -44,10 +44,9 @@ export function execSync(cmd, stdio, cwd) {
 
 /** 获取本地分支名 */
 export function getHeadBranch() {
-    const config = getConfig(null, true);
-    const head = fs.readFileSync(path.resolve(config.baseDir, './.git/HEAD'), { encoding: 'utf-8' });
+    const baseDir = process.cwd()
+    const head = fs.readFileSync(path.resolve(baseDir, './.git/HEAD'), { encoding: 'utf-8' });
     let branch = head.split('refs/heads/')[1];
-
     if (!branch) {
         // exec 速度比较慢
         branch = execSync('git rev-parse --abbrev-ref HEAD', 'pipe');

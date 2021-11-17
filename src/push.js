@@ -1,7 +1,7 @@
 const ora = require('ora');
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { execSync, getGitFile, createGitFile } from './utils/index'
+import { execSync, getGitFile, createGitFile, getHeadBranch } from './utils/index'
 import { initAccount } from './utils/jiraAccount'
 import { typeList, scopes } from './utils/constants'
 
@@ -76,9 +76,11 @@ const getSformData = (data, name) => {
     }
 }
 
+
 const push = async (action, ...params) => {
     const fileData = await getGitFile()
     let data = {}
+    const branchName = getHeadBranch()
     // 存在过期时间
     if (fileData.expirationTime && fileData.startTime) {
         const nowData = +new Date()
@@ -167,7 +169,7 @@ const push = async (action, ...params) => {
         // 默认添加 执行添加
         execSync('git add *')
         execSync(`git commit -m "${completeText}"`)
-        execSync('git push')
+        execSync('git push origin ' + branchName)
         return
     } else {
         // 默认添加 执行添加
@@ -181,7 +183,7 @@ const push = async (action, ...params) => {
         name: 'pushType',
         message: '请选择提交命令（提交到远程哪个分支）',
         choices: [
-            'git push',
+            `git push origin ` + branchName,
             '自定义',
         ]
     }])
@@ -195,7 +197,7 @@ const push = async (action, ...params) => {
             type: 'input', 
             name: 'cusPush',
             message: '请输入git命令将文件推送到远程具体分支',
-            default: 'git push'
+            default: 'git push orign ' + branchName
         }])
         execSync(customCommit.cusPush)
     }
