@@ -166,7 +166,7 @@ const push = async (action, ...params) => {
     execSync(`git commit -m "${completeText}"`)
     const gitPushStr = '自定义';
     let gitPushType = await inquirer.prompt([{
-        type: 'input', 
+        type: 'rawlist', 
         name: 'pushType',
         message: '请选择提交命令（提交到远程哪个分支）',
         choices: [
