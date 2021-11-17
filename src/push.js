@@ -158,6 +158,7 @@ const push = async (action, ...params) => {
             type: 'input', 
             name: 'cusCommit',
             message: '请输入git命令将文件添加到暂存区',
+            default: 'git add *'
         }])
          // 默认添加 执行添加
         execSync(customCommit.cusCommit)
@@ -185,6 +186,7 @@ const push = async (action, ...params) => {
             type: 'input', 
             name: 'cusPush',
             message: '请输入git命令将文件推送到远程具体分支',
+            default: 'git push'
         }])
         console.log('自定义', customCommit.cusPush)
         execSync(customCommit.cusPush)
