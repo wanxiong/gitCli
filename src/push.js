@@ -99,7 +99,7 @@ const push = async (action, ...params) => {
     let pre = await inquirer.prompt([{
         type: 'rawlist', 
         name: 'preType',
-        message: '请选择更改类型',
+        message: '请选择更改类型（回车确认）',
         choices: typeList,
         pageSize: 10
     }])
@@ -107,7 +107,7 @@ const push = async (action, ...params) => {
     let moduleType = await inquirer.prompt([{
         type: 'checkbox', 
         name: 'moduleType',
-        message: '请选择模块范围（可回车跳过）',
+        message: '请选择模块范围（空格选中、可回车跳过）',
         choices: scopes,
         pageSize: 20
     }])
@@ -175,8 +175,8 @@ const push = async (action, ...params) => {
         ]
     }])
     // 推送远程
-    if (gitAddType.pushType !== gitPushStr) {
-        console.log('自定义')
+    if (gitPushType.pushType !== gitPushStr) {
+        console.log('非自定义')
         // 默认添加 执行添加
         execSync(gitPushType.pushType) 
         return
@@ -186,7 +186,7 @@ const push = async (action, ...params) => {
             name: 'cusPush',
             message: '请输入git命令将文件推送到远程具体分支',
         }])
-        console.log('非自定义', customCommit.cusPush)
+        console.log('自定义', customCommit.cusPush)
         execSync(customCommit.cusPush)
     }
 }
