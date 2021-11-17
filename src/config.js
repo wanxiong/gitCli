@@ -1,13 +1,6 @@
-// import ora from 'ora';
-import inquirer from 'inquirer';
-import fs from 'fs';
+
 import chalk from 'chalk';
-import path from 'path'
-import { pathUrl } from './utils/constants'
-import { execSync, getGitFile } from './utils/index'
-// 创建git账号文件
-
-
+import { getGitFile } from './utils/index'
 
 const config = async (action, ...params) => {
     const [control, type, v] = params

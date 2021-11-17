@@ -9,7 +9,7 @@ export async function getGitFile  () {
     return new Promise((resolve, reject) => {
         fs.readFile(path.resolve(__dirname, '../', pathUrl), 'utf-8', (err, data) => {
             if (err) {
-                console.log(chalk.red('初始化文件错误，请重新初始化命令 <init>'))
+                console.log(chalk.red('初始化文件错误，请重新初始化命令 <mdmCommit init>'))
                 throw err;
             }
             resolve(JSON.parse(data))
@@ -36,7 +36,8 @@ export async function createGitFile (data) {
 export function execSync(cmd, stdio, cwd) {
     if (!cwd) cwd = process.cwd();
     if (!stdio) stdio = 'inherit';
-    const res = spawn.sync(cmd, { stdio, encoding: 'utf8', cwd });
+    const res = spawn.sync(cmd, { stdio, encoding: 'utf8', cwd,  });
+    console.log('1111111', res)
     return res
 }
 

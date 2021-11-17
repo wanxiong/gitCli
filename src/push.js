@@ -47,9 +47,17 @@ const getSformData = (data, name) => {
                 list.push(arr[i])
             }
         }
+        // 子任务存在别人的父任务当中
+        otherList.forEach((item) => {
+            const parentId = item.parentId;
+            // 父任务不是自己创建的
+            if (parentObj[parentId] && parentObj[parentId].assignee !== name) {
+                myselfparentObj[parentObj[parentId].id] = parentObj[parentId]
+            }
+        })
 
         Object.values(myselfparentObj).forEach(item => {
-            let str =  `${item.key}（父任务）${item.summary.slice(0, 40)}`
+            let str =  `${item.key}-${item.assigneeName}（父任务）${item.summary.slice(0, 40)}`
             perfect.push({
                 value: item.key,
                 name: str
@@ -58,11 +66,12 @@ const getSformData = (data, name) => {
                 if (subItem.parentId === item.id) {
                     perfect.push({
                         value: subItem.key,
-                        name: `--- ${subItem.key}（子任务）${subItem.summary.slice(0, 40)}`
+                        name: `--- ${subItem.key}-${subItem.assigneeName}（子任务）${subItem.summary.slice(0, 40)}`
                     })
                 }
             })
         })
+        
 
     }
 

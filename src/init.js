@@ -24,7 +24,6 @@ const init = async (action) => {
         const { isInit } = answer
         isInit && (inquirer.prompt([
             {
-                // type: 'list', 
                 name: 'name',
                 message: '请输入jira账号'
             },

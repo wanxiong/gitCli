@@ -9,17 +9,17 @@ let actionMap = {
         alias: 'I', // 别名
         description: '初始化配置', // 描述
         usages: [
-            'test-cli init',
+            'mdmCommit init',
         ]
     },
     config: {
         alias: 'C', // 别名
         description: '设置或者得到邮箱和密码', // 描述
         usages: [
-            'test-cli config set name <val>',
-            'test-cli config set password <val>',
-            'test-cli config get name',
-            'test-cli config get password',
+            'mdmCommit config set name <val>',
+            'mdmCommit config set password <val>',
+            'mdmCommit config get name',
+            'mdmCommit config get password',
         ]
     },
     push: {
