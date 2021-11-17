@@ -1,0 +1,38 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel src -d dist",
+    "watch": "npm run compile -- --watch"
+  },
+  "bin": {
+    "test-cli": "./bin/cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.16.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "chalk": "^4.1.2",
+    "commander": "^8.3.0",
+    "cross-spawn": "^7.0.3",
+    "download-git-repo": "^3.0.2",
+    "eslint": "^8.2.0",
+    "fs": "0.0.1-security",
+    "husky": "^7.0.4",
+    "ini": "^2.0.0",
+    "inquirer": "^8.2.0",
+    "log-symbols": "^5.0.0",
+    "ora": "^5.1.0",
+    "puppeteer": "^11.0.0",
+    "util": "^0.12.4"
+  }
+}
