@@ -139,6 +139,7 @@ const push = async (action, ...params) => {
     
     console.log(chalk.blue('commit文案：' + completeText))
     const gitAddStr = '自定义';
+    const gitAuto = '一键自动添加、提交、推送'
     // 添加暂缓命令
     let gitAddType = await inquirer.prompt([{
         type: 'rawlist', 
@@ -148,12 +149,11 @@ const push = async (action, ...params) => {
             'git add *',
             'git add ./src',
             gitAddStr,
+            gitAuto
         ]
     }])
-    if (gitAddType.addType !== gitAddStr) {
-        // 默认添加 执行添加
-        execSync(gitAddType.addType)
-    } else {
+    if (gitAddType.addType === gitAddStr) {
+        // 自定义添加
         let customCommit = await inquirer.prompt([{
             type: 'input', 
             name: 'cusCommit',
@@ -162,6 +162,16 @@ const push = async (action, ...params) => {
         }])
          // 默认添加 执行添加
         execSync(customCommit.cusCommit)
+    } else if (gitAddType.addType === gitAuto) {
+        // 一键自动化
+        // 默认添加 执行添加
+        execSync('git add *')
+        execSync(`git commit -m "${completeText}"`)
+        execSync('git push')
+        return
+    } else {
+        // 默认添加 执行添加
+        execSync(gitAddType.addType)
     }
     // 获取commit文案
     execSync(`git commit -m "${completeText}"`)
@@ -177,7 +187,6 @@ const push = async (action, ...params) => {
     }])
     // 推送远程
     if (gitPushType.pushType !== gitPushStr) {
-        console.log('非自定义')
         // 默认添加 执行添加
         execSync(gitPushType.pushType) 
         return
@@ -188,7 +197,6 @@ const push = async (action, ...params) => {
             message: '请输入git命令将文件推送到远程具体分支',
             default: 'git push'
         }])
-        console.log('自定义', customCommit.cusPush)
         execSync(customCommit.cusPush)
     }
 }
