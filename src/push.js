@@ -25,7 +25,7 @@ const writeData = async (fileData) => {
     return data
 }
 
-const getSformData = (data, name) => {
+const getSformData = (data, name, isAll) => {
     let parentObj = {}
     let list = []
     let myselfparentObj = {}
@@ -47,6 +47,12 @@ const getSformData = (data, name) => {
                 list.push(arr[i])
             }
         }
+
+        if(isAll) {
+            otherList = list;
+            myselfparentObj = parentObj
+        }
+
         // 子任务存在别人的父任务当中
         otherList.forEach((item) => {
             const parentId = item.parentId;
@@ -87,6 +93,8 @@ const getSformData = (data, name) => {
 
 
 const push = async (action, ...params) => {
+    console.log(111, params)
+    const [first] = params
     const fileData = await getGitFile()
     let data = {}
     const branchName = getHeadBranch()
@@ -104,7 +112,7 @@ const push = async (action, ...params) => {
         data = await writeData(fileData, data)
     }
     // 执行交互命令选择获取的内容
-    const sformData = getSformData(data, fileData.name)
+    const sformData = getSformData(data, fileData.name, first === '-all')
     const ownList = sformData.perfect
     // 本次提交属于新增还是啥
     let pre = await inquirer.prompt([{

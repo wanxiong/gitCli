@@ -37,7 +37,10 @@ export function execSync(cmd, stdio, cwd) {
     if (!cwd) cwd = process.cwd();
     if (!stdio) stdio = 'inherit';
     const res = spawn.sync(cmd, { stdio, encoding: 'utf8', cwd,  });
-    console.log('1111111', res)
+    if (res.status !== 0) {
+        console.log(res)
+        throw new Error(chalk.bgRed('异常中断code=' + res.status)) 
+    }
     return res
 }
 

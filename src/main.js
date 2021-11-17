@@ -25,7 +25,11 @@ let actionMap = {
     push: {
         alias: 'P', // 别名
         description: '提交代码', // 描述
-        usages: []
+        usages: [
+            'mdmCommit push',
+            'mdmCommit push -all',
+        ],
+        option: '-all'
     },
 }
 
@@ -38,6 +42,10 @@ Object.keys(actionMap).forEach((action) => {
     .action(() => { // 动作
         apply(action, ...process.argv.slice(3));
     });
+
+    if (actionMap[action].option) {
+        program.option(actionMap[action].option,)
+    }
 });
 
 //
@@ -48,21 +56,11 @@ function help() {
             console.log('  - ' + usage);
         });
     });
-    console.log('\r');
 }
-program.usage('<command> [options]');
+program.usage('<command> [options]')
+
 // eos -h 
 program.on('-h', help);
-program.on('--help', help);
+// program.on('--help', help);
 // eos -V   VERSION 为 package.json 中的版本号
 program.version(VERSION, '-V --version').parse(process.argv);
-
-
-if (!process.argv.slice(2).length) {
-    program.outputHelp(make_green);
-}
-
-
-function make_green(txt) {
-    return chalk.green(txt); 
-}
