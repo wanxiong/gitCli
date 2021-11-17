@@ -133,9 +133,9 @@ const push = async (action, ...params) => {
         name: 'commitText',
         message: '请输入提交的备注信息',
     }])
-
+    console.log(moduleType.moduleType)
     // release(mdm-antd, mdm-creator): sform-4118 xxxxx
-    const completeText = `${pre.preType}${moduleType.moduleType ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType} ${commitMessage.commitText}`
+    const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType} ${commitMessage.commitText}`
     
     console.log(chalk.blue('commit文案：' + completeText))
     const gitAddStr = '自定义';
