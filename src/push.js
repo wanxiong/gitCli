@@ -1,12 +1,9 @@
 const ora = require('ora');
 import inquirer from 'inquirer';
-import fs from 'fs';
 import chalk from 'chalk';
-// import ora from 'ora'
 import { execSync, getGitFile, createGitFile } from './utils/index'
 import { initAccount } from './utils/jiraAccount'
 import { typeList, scopes } from './utils/constants'
-import { dirname } from 'path';
 
 const spinner = ora('Loading')
 
@@ -80,19 +77,15 @@ const getSformData = (data, name) => {
 }
 
 const push = async (action, ...params) => {
-    const [control, type, v] = params
     const fileData = await getGitFile()
-
     let data = {}
     // 存在过期时间
     if (fileData.expirationTime && fileData.startTime) {
         const nowData = +new Date()
         if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
             // 重新获取
-            // console.log('重新获取')
             data = await writeData(fileData, data)
         } else {
-            // console.log('缓存中获取')
             // 缓存中获取
             data = fileData.baseData
         }
@@ -102,7 +95,7 @@ const push = async (action, ...params) => {
     // 执行交互命令选择获取的内容
     const sformData = getSformData(data, fileData.name)
     const ownList = sformData.perfect
-
+    // 本次提交属于新增还是啥
     let pre = await inquirer.prompt([{
         type: 'rawlist', 
         name: 'preType',
@@ -110,7 +103,7 @@ const push = async (action, ...params) => {
         choices: typeList,
         pageSize: 10
     }])
-
+    // 修改涉及到的模块
     let moduleType = await inquirer.prompt([{
         type: 'checkbox', 
         name: 'moduleType',
@@ -118,7 +111,7 @@ const push = async (action, ...params) => {
         choices: scopes,
         pageSize: 20
     }])
-
+    // 本次对应的sform Id
     let formAnswer = await inquirer.prompt([{
         type: 'checkbox', 
         name: 'sformType',
@@ -134,31 +127,32 @@ const push = async (action, ...params) => {
             }
         }
     }])
+    // 提交文案
     let commitMessage = await inquirer.prompt([{
         type: 'input', 
         name: 'commitText',
         message: '请输入提交的备注信息',
     }])
+
     // release(mdm-antd, mdm-creator): sform-4118 xxxxx
     const completeText = `${pre.preType}${moduleType.moduleType ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType} ${commitMessage.commitText}`
+    
     console.log(chalk.blue('commit文案：' + completeText))
-    const gitAddStr = 'git add *';
+    const gitAddStr = '自定义';
+    // 添加暂缓命令
     let gitAddType = await inquirer.prompt([{
         type: 'rawlist', 
         name: 'addType',
         message: '请选择添加命令（如何将文件添加到暂存区）',
         choices: [
+            'git add *',
+            'git add ./src',
             gitAddStr,
-            '自定义',
         ]
     }])
-    if (gitAddType.addType === gitAddStr) {
+    if (gitAddType.addType !== gitAddStr) {
         // 默认添加 执行添加
         execSync(gitAddType.addType)
-        // 获取commit文案
-        execSync(`git commit -m "${completeText}"`)
-        // 提交文案
-        execSync(`git push`) 
     } else {
         let customCommit = await inquirer.prompt([{
             type: 'input', 
@@ -167,8 +161,31 @@ const push = async (action, ...params) => {
         }])
          // 默认添加 执行添加
         execSync(customCommit.cusCommit)
-        console.log(customCommit.cusCommit)
-        execSync(`git commit -m ${completeText}`)
+    }
+    // 获取commit文案
+    execSync(`git commit -m "${completeText}"`)
+    const gitPushStr = '自定义';
+    let gitPushType = await inquirer.prompt([{
+        type: 'input', 
+        name: 'pushType',
+        message: '请选择提交命令（提交到远程哪个分支）',
+        choices: [
+            'git push',
+            '自定义',
+        ]
+    }])
+    // 推送远程
+    if (gitAddType.addType !== gitPushStr) {
+        // 默认添加 执行添加
+        execSync(gitPushType.pushType) 
+        return
+    } else {
+        let customCommit = await inquirer.prompt([{
+            type: 'input', 
+            name: 'cusPush',
+            message: '请输入git命令将文件推送到远程具体分支',
+        }])
+        execSync(customCommit.cusPush)
     }
 }
 
