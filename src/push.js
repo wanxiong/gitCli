@@ -227,6 +227,7 @@ const push = async (action, d) => {
     if (action === 'commit') {
         return
     }
+    
     const gitPushStr = '自定义';
     let gitPushType = await inquirer.prompt([{
         type: 'rawlist', 
