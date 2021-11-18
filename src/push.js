@@ -170,11 +170,10 @@ const push = async (action, d) => {
         name: 'commitText',
         message: '请输入提交的备注信息',
     }])
-    console.log(moduleType.moduleType)
     // release(mdm-antd, mdm-creator): sform-4118 xxxxx
     const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType} ${commitMessage.commitText}`
     
-    console.log(chalk.blue('commit文案：' + completeText))
+    console.log(chalk.green('\n最终提交文案：' + completeText + '\n'))
     const gitAddStr = '自定义';
     const gitAuto = '一键自动添加、提交、推送'
     // 添加暂缓命令
@@ -187,8 +186,20 @@ const push = async (action, d) => {
             'git add ./src',
             gitAddStr,
             gitAuto
-        ]
+        ].filter((text) => {
+            if (action === 'commit' && text === gitAuto) return false;
+            return true
+        })
     }])
+
+    let ignoreCommitType = await inquirer.prompt([{
+        type: 'rawlist', 
+        name: 'ignoreCommit',
+        message: '提交是否跳过commit相关的husky校验',
+        choices: ['是','否'],
+        default: '是'
+    }])
+
     if (gitAddType.addType === gitAddStr) {
         // 自定义添加
         let customCommit = await inquirer.prompt([{
@@ -203,7 +214,7 @@ const push = async (action, d) => {
         // 一键自动化
         // 默认添加 执行添加
         execSync('git add *')
-        execSync(`git commit -m "${completeText}"`)
+        execSync(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
         execSync('git push origin ' + branchName)
         return
     } else {
@@ -211,7 +222,7 @@ const push = async (action, d) => {
         execSync(gitAddType.addType)
     }
     // 获取commit文案
-    execSync(`git commit -m "${completeText}"`)
+    execSync(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
     if (action === 'commit') {
         return
     }

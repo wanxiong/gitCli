@@ -69,7 +69,6 @@ export const initAccount = async function (account) {
                 const params = '?rapidViewId=' + str
                 const respone  = await page.goto(getListUrl + params);
                 const jsonData = await respone.json()
-                console.log('data===', jsonData)
                 await browser.close();
                 resolve(jsonData)
             } else {

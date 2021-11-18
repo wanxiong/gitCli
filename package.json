@@ -1,8 +1,8 @@
 {
-  "name": "cli",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@tms/mdm-git-cli",
+  "version": "1.0.3",
+  "description": "前端提交小工具",
+  "main": "./dist/main.js",
   "scripts": {
     "compile": "babel src -d dist",
     "watch": "npm run compile -- --watch"
@@ -10,8 +10,12 @@
   "bin": {
     "mdmGit": "./bin/cli.js"
   },
+  "files": [
+    "bin",
+    "dist"
+  ],
   "keywords": [],
-  "author": "",
+  "author": "xiong.wan",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.16.3"
