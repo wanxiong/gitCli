@@ -221,6 +221,7 @@ const push = async (action, d) => {
         // 默认添加 执行添加
         execSync(gitAddType.addType)
     }
+    console.log(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
     // 获取commit文案
     execSync(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
     if (action === 'commit') {
