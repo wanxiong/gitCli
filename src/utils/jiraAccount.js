@@ -34,6 +34,9 @@ export const initAccount = async function (account) {
             // 得到看板按钮
             const boardBtn = await page.$('#greenhopper_menu');
             // 点击按钮
+            await page.screenshot({
+               path: process.cwd() + '/account.png'
+            })
             await boardBtn.click();
             // 获取下拉数据
             const boardList = []
@@ -42,14 +45,10 @@ export const initAccount = async function (account) {
                 let data = await linkList[i].$eval('a', el => {
                     const href = el.getAttribute('href');
                     // 获取所有的信息
-                    let reg = new RegExp("rapidView=([^&?]*)", "ig");
-                    let str = href.match(reg) ? href.match(reg) : ''
-                    const params = '?' + str
                     return {
                         originHref: 'http://jira.taimei.com' + href,
                         innerHTML: el.innerHTML,
-                        id: el.getAttribute('id'),
-                        href: 'http://jira.taimei.com' + href.split('?')[0] + params
+                        id: el.getAttribute('id')
                     }
                 })
                 boardList.push(data)
@@ -57,11 +56,26 @@ export const initAccount = async function (account) {
             await page.screenshot({
                path: process.cwd() + '/account.png'
             })
+            const hasBoard = boardList.filter((item) => {
+                const text = item.innerHTML;
+                if (text.trim() === account.designatedBoard.trim()) {
+                    return item
+                }
+            })
+            if (hasBoard.length) {
+                let reg = new RegExp("rapidView=([^&?]*)", "ig");
+                const mat = reg.exec(hasBoard[0].originHref)
+                let str =  mat ? mat[1] : ''
+                const params = '?rapidViewId=' + str
+                const respone  = await page.goto(getListUrl + params);
+                const jsonData = await respone.json()
+                console.log('data===', jsonData)
+                await browser.close();
+                resolve(jsonData)
+            } else {
+                throw new Error('你没有相关的看板内容====' + account.designatedBoard.trim() + ',请重新选择看板')
+            }
             // 获取数据
-            const respone  = await page.goto(getListUrl + '?rapidViewId=244');
-            const jsonData = await respone.json()
-            await browser.close();
-            resolve(jsonData, boardList)
         } catch (error) {
             await browser.close();
             reject(error)

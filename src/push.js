@@ -8,21 +8,30 @@ import { typeList, scopes, defaultBoard } from './utils/constants'
 const spinner = ora('Loading')
 
 // 连接jira账号并获取对应的数据 && 写入文件
-const writeData = async (fileData) => {
+const writeData = async (fileData, designatedBoard) => {
     spinner.color = 'yellow';
     spinner.start('获取关联的jira账号');
-    const data = await initAccount({
-        name: fileData.name,
-        password: fileData.password,
-        delay: 2000
-    })
-    fileData.baseData = data
-    // 2小时过期
-    fileData.expirationTime = 7200 * 1000
-    fileData.startTime = +new Date()
-    await createGitFile(fileData)
-    spinner.succeed('获取jira账号成功')
-    return data
+    try {
+        const data = await initAccount({
+            name: fileData.name,
+            password: fileData.password,
+            delay: 2000,
+            designatedBoard: designatedBoard || defaultBoard
+        })
+        fileData.baseData = data
+        // 2小时过期
+        fileData.expirationTime = 7200 * 1000
+        fileData.startTime = +new Date()
+        fileData.boardType = designatedBoard;
+        await createGitFile(fileData)
+        spinner.succeed('获取jira账号成功')
+        return data
+    } catch (error) {
+        spinner.stop(chalk.red('异常终止获取jira数据'))
+        throw new Error(error)
+
+    }
+    
 }
 
 const getSformData = (data, name, isAll, otherBoard) => {
@@ -31,8 +40,9 @@ const getSformData = (data, name, isAll, otherBoard) => {
     let myselfparentObj = {}
     let otherList = []
     let perfect = []
+
     if (data.issuesData && data.issuesData.issues) {
-        let arr = data.issuesData.issues;
+        let arr = data.issuesData.issues.slice(0, 50);
         for (var i = 0; i < arr.length; i++) {
             if (!arr[i].parentId) {
                 // 顶级
@@ -79,6 +89,8 @@ const getSformData = (data, name, isAll, otherBoard) => {
         })
         
 
+    } else {
+        throw new Error(chalk.bgRed('当前看板' + otherBoard +'的数据不存在'))
     }
 
 
@@ -99,20 +111,27 @@ const push = async (action, d) => {
     const branchName = getHeadBranch()
     // 存在过期时间
     if (fileData.expirationTime && fileData.startTime) {
-        const nowData = +new Date()
-        if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
-            // 重新获取
-            data = await writeData(fileData, data)
-        } else {
-            // 缓存中获取
-            data = fileData.baseData
+        if (designatedBoard === fileData.boardType) { // 看板类型相同 直接读取输
+            const nowData = +new Date()
+            if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
+                // 重新获取
+                data = await writeData(fileData, designatedBoard)
+            } else {
+                // 缓存中获取
+                data = fileData.baseData
+            }
+        } else { // 需要重新获取
+            data = await writeData(fileData, designatedBoard)
         }
     } else {
-        data = await writeData(fileData, data)
+        data = await writeData(fileData, designatedBoard)
     }
     // 执行交互命令选择获取的内容
     const sformData = getSformData(data, fileData.name, allData, designatedBoard)
     const ownList = sformData.perfect
+    if (!ownList.length) {
+        throw new Error(chalk.red('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据'))
+    }
     // 本次提交属于新增还是啥
     let pre = await inquirer.prompt([{
         type: 'rawlist', 
@@ -193,6 +212,9 @@ const push = async (action, d) => {
     }
     // 获取commit文案
     execSync(`git commit -m "${completeText}"`)
+    if (action === 'commit') {
+        return
+    }
     const gitPushStr = '自定义';
     let gitPushType = await inquirer.prompt([{
         type: 'rawlist', 

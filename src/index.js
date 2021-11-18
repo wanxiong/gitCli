@@ -17,6 +17,10 @@ function apply (action, d, ...params) {
             //配置
             push(action, d,...params)
             break;
+        case 'commit': 
+            //配置
+            push(action, d,...params)
+            break;
         default:
             chalk.red(`${action}命令不存在`)
             break;
