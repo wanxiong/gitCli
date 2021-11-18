@@ -3,7 +3,7 @@ import init from './init'
 import config from './config'
 import push from './push'
 
-function apply (action, ...params) {
+function apply (action, d, ...params) {
     switch (action) {
         case 'init': 
             //配置
@@ -15,7 +15,7 @@ function apply (action, ...params) {
             break;
         case 'push': 
             //配置
-            push(action, ...params)
+            push(action, d,...params)
             break;
         default:
             chalk.red(`${action}命令不存在`)

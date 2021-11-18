@@ -3,7 +3,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { execSync, getGitFile, createGitFile, getHeadBranch } from './utils/index'
 import { initAccount } from './utils/jiraAccount'
-import { typeList, scopes } from './utils/constants'
+import { typeList, scopes, defaultBoard } from './utils/constants'
 
 const spinner = ora('Loading')
 
@@ -25,7 +25,7 @@ const writeData = async (fileData) => {
     return data
 }
 
-const getSformData = (data, name, isAll) => {
+const getSformData = (data, name, isAll, otherBoard) => {
     let parentObj = {}
     let list = []
     let myselfparentObj = {}
@@ -92,9 +92,8 @@ const getSformData = (data, name, isAll) => {
 }
 
 
-const push = async (action, ...params) => {
-    console.log(111, params)
-    const [first] = params
+const push = async (action, d) => {
+    const {designatedBoard, allData} = d
     const fileData = await getGitFile()
     let data = {}
     const branchName = getHeadBranch()
@@ -112,7 +111,7 @@ const push = async (action, ...params) => {
         data = await writeData(fileData, data)
     }
     // 执行交互命令选择获取的内容
-    const sformData = getSformData(data, fileData.name, first === '-all')
+    const sformData = getSformData(data, fileData.name, allData, designatedBoard)
     const ownList = sformData.perfect
     // 本次提交属于新增还是啥
     let pre = await inquirer.prompt([{

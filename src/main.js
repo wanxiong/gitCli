@@ -1,5 +1,5 @@
 import program from 'commander'
-import { VERSION } from './utils/constants'
+import { VERSION, defaultBoard } from './utils/constants'
 import apply from './index'
 import chalk from 'chalk'
 
@@ -29,22 +29,26 @@ let actionMap = {
             'mdmCommit push',
             'mdmCommit push -all',
         ],
-        option: '-all'
+        option: [
+            ['-d, --designated-board', '指定看板的模块', defaultBoard],
+            ['-allD, --all-data', '看到所有数据', false]
+        ]
     },
 }
 
 
 // 添加 init / config 命令
 Object.keys(actionMap).forEach((action) => {
-    program.command(action) //配置命令的名字
+    const command = program.command(action) //配置命令的名字
     .description(actionMap[action].description) // 描述
     .alias(actionMap[action].alias) //别名
-    .action(() => { // 动作
-        apply(action, ...process.argv.slice(3));
+    .action((d) => { // 动作
+        apply(action, d, ...process.argv.slice(3));
     });
-
     if (actionMap[action].option) {
-        program.option(actionMap[action].option,)
+        actionMap[action].option.forEach((item) => {
+            command.option(...item)
+        })
     }
 });
 
@@ -57,10 +61,10 @@ function help() {
         });
     });
 }
-program.usage('<command> [options]')
+program.usage('<command> [options]');
 
 // eos -h 
 program.on('-h', help);
-// program.on('--help', help);
+program.on('--help', help);
 // eos -V   VERSION 为 package.json 中的版本号
 program.version(VERSION, '-V --version').parse(process.argv);
