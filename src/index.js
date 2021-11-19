@@ -16,7 +16,7 @@ function apply (action, d, ...params) {
             break;
         case 'push': 
             //配置
-            execSync('git add ./')
+            execSync('git commit ./')
             return
             push(action, d,...params)
             break;

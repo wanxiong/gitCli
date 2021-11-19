@@ -40,7 +40,10 @@ export function execSync(cmd, stdio, cwd) {
     const res = spawn.sync(cmd, { stdio, encoding: 'utf8', cwd,  });
     console.log(res)
     if (res.status !== 0) {
-        throw new Error(chalk.bgRed('异常中断code=' + res.status + '\n' + res.error)) 
+        // 1的时候commit 没有变更
+        if (res.status !== 1) {
+            throw new Error(chalk.bgRed('异常中断code=' + res.status + '\n' + res.error)) 
+        }
     }
     return res
 }
