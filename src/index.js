@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import init from './init'
 import config from './config'
 import push from './push'
+import { execSync } from './utils/index'
 
 function apply (action, d, ...params) {
     switch (action) {
@@ -15,6 +16,8 @@ function apply (action, d, ...params) {
             break;
         case 'push': 
             //配置
+            execSync('git add ./')
+            return
             push(action, d,...params)
             break;
         case 'commit': 
