@@ -1,4 +1,4 @@
-export const VERSION = "0.0.1"
+export const VERSION = "1.0.1"
 export const pathUrl = 'baseConfig.json'
 export const defaultBoard = 'SFORM Sprint'
 export const typeList = [

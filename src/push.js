@@ -221,13 +221,13 @@ const push = async (action, d) => {
         // 默认添加 执行添加
         execSync(gitAddType.addType)
     }
-    console.log(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
     // 获取commit文案
+    console.log(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
     execSync(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
     if (action === 'commit') {
         return
     }
-    
+
     const gitPushStr = '自定义';
     let gitPushType = await inquirer.prompt([{
         type: 'rawlist', 
@@ -238,6 +238,7 @@ const push = async (action, d) => {
             '自定义',
         ]
     }])
+    console.log(gitPushType.pushType)
     // 推送远程
     if (gitPushType.pushType !== gitPushStr) {
         // 默认添加 执行添加

@@ -34,6 +34,7 @@ export async function createGitFile (data) {
 }
 
 export function execSync(cmd, stdio, cwd) {
+    console.log('cwd====', 123, cwd)
     if (!cwd) cwd = process.cwd();
     if (!stdio) stdio = 'inherit';
     const res = spawn.sync(cmd, { stdio, encoding: 'utf8', cwd,  });
