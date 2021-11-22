@@ -36,5 +36,17 @@ mdmGit push -a [option]
 // 案例指定看板
 mdmGit push -a true
 ```
+
+- 当你只需要提交文案的时候，你可以这样
+```js
+// 获取自定义提交文案
+mdmGit message
+```
 # 验证是否成功
 mdmGit --help
+
+
+# 说明
+`.git`查找文件是根据指令运行时的环境环境路径查找，请确保当前运行目录存在`.git`文件
+
+暂不支持cwd传入

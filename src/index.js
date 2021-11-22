@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import init from './init'
 import config from './config'
 import push from './push'
-import { execSync } from './utils/index'
+import message from './message.js';
 
 function apply (action, d, ...params) {
     switch (action) {
@@ -21,6 +21,9 @@ function apply (action, d, ...params) {
         case 'commit': 
             //配置
             push(action, d,...params)
+            break;
+        case 'message':
+            message(action, d,...params)
             break;
         default:
             chalk.red(`${action}命令不存在`)

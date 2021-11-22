@@ -2,8 +2,12 @@
 import fs from 'fs';
 import path from 'path'
 import { pathUrl } from './constants'
-import spawn from 'cross-spawn';
 import chalk from 'chalk';
+import childProcess from 'child_process';
+import ora from 'ora'
+import { initAccount } from './jiraAccount'
+
+const spinner = ora('Loading')
 
 export async function getGitFile  () {
     return new Promise((resolve, reject) => {
@@ -34,20 +38,21 @@ export async function createGitFile (data) {
 }
 
 export function execSync(cmd, stdio, cwd) {
-    console.log('cwd====', 123, cwd)
     if (!cwd) cwd = process.cwd();
     if (!stdio) stdio = 'inherit';
-    const res = spawn.sync(cmd, { stdio, encoding: 'utf8', cwd,  });
-    console.log(res)
-    if (res.status !== 0) {
+    try {
+        const res = childProcess.execSync(cmd, { stdio, encoding: 'utf8', cwd });
+        if (res) return res.toString().trim();
+        return res
+    } catch (error) {
+        // console.log(error)
         // 1的时候commit 没有变更
-        if (res.status !== 1) {
-            throw new Error(chalk.bgRed('异常中断code=' + res.status + '\n' + res.error)) 
+        if (error.status !== 1) {
+            throw new Error(chalk.bgRed('异常中断code=' + error.status + '\n' + error)) 
         }
+        return null
     }
-    return res
 }
-
 
 
 /** 获取本地分支名 */
@@ -61,4 +66,30 @@ export function getHeadBranch() {
     }
 
     return branch.trim();
+}
+
+// 连接jira账号并获取对应的数据 && 写入文件
+export const writeData = async (fileData, designatedBoard) => {
+    spinner.color = 'yellow';
+    spinner.start('获取关联的jira账号');
+    try {
+        const data = await initAccount({
+            name: fileData.name,
+            password: fileData.password,
+            delay: 2000,
+            designatedBoard: designatedBoard || defaultBoard
+        })
+        fileData.baseData = data
+        // 2小时过期
+        fileData.expirationTime = 7200 * 1000
+        fileData.startTime = +new Date()
+        fileData.boardType = designatedBoard;
+        await createGitFile(fileData)
+        spinner.succeed('获取jira账号成功')
+        return data
+    } catch (error) {
+        spinner.stop(chalk.red('异常终止获取jira数据'))
+        throw new Error(error)
+    }
+    
 }

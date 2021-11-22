@@ -1,40 +1,10 @@
 const ora = require('ora');
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { execSync, getGitFile, createGitFile, getHeadBranch } from './utils/index'
-import { initAccount } from './utils/jiraAccount'
+import { execSync, getGitFile, getHeadBranch } from './utils/index'
 import { typeList, scopes, defaultBoard } from './utils/constants'
 
-const spinner = ora('Loading')
-
-// 连接jira账号并获取对应的数据 && 写入文件
-const writeData = async (fileData, designatedBoard) => {
-    spinner.color = 'yellow';
-    spinner.start('获取关联的jira账号');
-    try {
-        const data = await initAccount({
-            name: fileData.name,
-            password: fileData.password,
-            delay: 2000,
-            designatedBoard: designatedBoard || defaultBoard
-        })
-        fileData.baseData = data
-        // 2小时过期
-        fileData.expirationTime = 7200 * 1000
-        fileData.startTime = +new Date()
-        fileData.boardType = designatedBoard;
-        await createGitFile(fileData)
-        spinner.succeed('获取jira账号成功')
-        return data
-    } catch (error) {
-        spinner.stop(chalk.red('异常终止获取jira数据'))
-        throw new Error(error)
-
-    }
-    
-}
-
-const getSformData = (data, name, isAll, otherBoard) => {
+export const getSformData = (data, name, isAll, otherBoard) => {
     let parentObj = {}
     let list = []
     let myselfparentObj = {}
@@ -115,12 +85,15 @@ const push = async (action, d) => {
             const nowData = +new Date()
             if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
                 // 重新获取
+                console.log(chalk.blueBright('重新获取jira信息'))
                 data = await writeData(fileData, designatedBoard)
             } else {
                 // 缓存中获取
+                console.log(chalk.blueBright('缓存中获取jira信息'))
                 data = fileData.baseData
             }
         } else { // 需要重新获取
+            console.log(chalk.blueBright('重新获取jira信息'))
             data = await writeData(fileData, designatedBoard)
         }
     } else {
@@ -173,7 +146,7 @@ const push = async (action, d) => {
     // release(mdm-antd, mdm-creator): sform-4118 xxxxx
     const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType} ${commitMessage.commitText}`
     
-    console.log(chalk.green('\n最终提交文案：' + completeText + '\n'))
+    // console.log(chalk.green('\n最终提交文案：' + completeText + '\n'))
     const gitAddStr = '自定义';
     const gitAuto = '一键自动添加、提交、推送'
     // 添加暂缓命令
@@ -209,20 +182,25 @@ const push = async (action, d) => {
             default: 'git add *'
         }])
          // 默认添加 执行添加
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(customCommit.cusCommit))
         execSync(customCommit.cusCommit)
     } else if (gitAddType.addType === gitAuto) {
         // 一键自动化
         // 默认添加 执行添加
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright('git add *'))
         execSync('git add *')
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`))
         execSync(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
-        execSync('git push origin ' + branchName)
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright('git push origin ' + `${branchName}`))
+        execSync('git push origin ' + `${branchName}`)
         return
     } else {
         // 默认添加 执行添加
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(gitAddType.addType))
         execSync(gitAddType.addType)
     }
     // 获取commit文案
-    console.log(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
+    console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`))
     execSync(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
     if (action === 'commit') {
         return
@@ -234,25 +212,27 @@ const push = async (action, d) => {
         name: 'pushType',
         message: '请选择提交命令（提交到远程哪个分支）',
         choices: [
-            `git push origin ` + branchName,
+            `git push origin ` + `${branchName}`,
             '自定义',
         ]
     }])
-    console.log(gitPushType.pushType)
+
     // 推送远程
     if (gitPushType.pushType !== gitPushStr) {
         // 默认添加 执行添加
-        execSync(gitPushType.pushType) 
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(gitPushType.pushType))
+        execSync('git push origin feature/3.2.19_SFORM_3678') 
         return
     } else {
         let customCommit = await inquirer.prompt([{
             type: 'input', 
             name: 'cusPush',
             message: '请输入git命令将文件推送到远程具体分支',
-            default: 'git push orign ' + branchName
+            default: 'git push orign ' + `${branchName}`
         }])
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(customCommit.cusPush))
         execSync(customCommit.cusPush)
     }
 }
 
-module.exports = push
+export default push

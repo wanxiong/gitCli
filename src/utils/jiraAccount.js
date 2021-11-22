@@ -1,4 +1,6 @@
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
+import puppeteer from 'puppeteer'
 
 const getListUrl = 'http://jira.taimei.com/rest/greenhopper/1.0/xboard/work/allData.json'
 

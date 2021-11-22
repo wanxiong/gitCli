@@ -46,6 +46,19 @@ let actionMap = {
             ['-a, --all-data', '看到所有数据', false]
         ]
     },
+    message: {
+        alias: 'M', // 别名
+        description: '获取提交commit信息', // 描述
+        usages: [
+            'mdmGit message',
+            'mdmGit message -d [options]',
+            'mdmGit message -a',
+        ],
+        option: [
+            ['-d, --designated-board [--designated-doard]', '指定看板的模块', defaultBoard],
+            ['-a, --all-data', '看到所有数据', false]
+        ]
+    },
 }
 
 
