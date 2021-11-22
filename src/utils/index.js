@@ -113,10 +113,11 @@ export const getJiraData = async (fileData, designatedBoard) => {
                 data = fileData.baseData
             }
         } else { // 需要重新获取
-            console.log(chalk.greenBright('初次获取jira信息...'))
+            console.log(chalk.greenBright('看板模块切换，重新获取jira信息...'))
             data = await writeData(fileData, designatedBoard)
         }
     } else {
+        console.log(chalk.greenBright('初次获取jira信息...'))
         data = await writeData(fileData, designatedBoard)
     }
     return data
