@@ -1,7 +1,7 @@
 const ora = require('ora');
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { getGitFile, writeData } from './utils/index'
+import { getGitFile, writeData, getJiraData } from './utils/index'
 import { typeList, scopes } from './utils/constants'
 import { getSformData } from './push'
 
@@ -10,22 +10,7 @@ const message = async (action, d) => {
     const fileData = await getGitFile()
     let data = {}
     // 存在过期时间
-    if (fileData.expirationTime && fileData.startTime) {
-        if (designatedBoard === fileData.boardType) { // 看板类型相同 直接读取输
-            const nowData = +new Date()
-            if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
-                // 重新获取
-                data = await writeData(fileData, designatedBoard)
-            } else {
-                // 缓存中获取
-                data = fileData.baseData
-            }
-        } else { // 需要重新获取
-            data = await writeData(fileData, designatedBoard)
-        }
-    } else {
-        data = await writeData(fileData, designatedBoard)
-    }
+    data = await getJiraData(fileData, designatedBoard)
     // 执行交互命令选择获取的内容
     const sformData = getSformData(data, fileData.name, allData, designatedBoard)
     const ownList = sformData.perfect

@@ -1,7 +1,7 @@
 const ora = require('ora');
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { execSync, getGitFile, getHeadBranch } from './utils/index'
+import { execSync, getGitFile, getHeadBranch, getJiraData } from './utils/index'
 import { typeList, scopes, defaultBoard } from './utils/constants'
 
 export const getSformData = (data, name, isAll, otherBoard) => {
@@ -80,25 +80,7 @@ const push = async (action, d) => {
     let data = {}
     const branchName = getHeadBranch()
     // 存在过期时间
-    if (fileData.expirationTime && fileData.startTime) {
-        if (designatedBoard === fileData.boardType) { // 看板类型相同 直接读取输
-            const nowData = +new Date()
-            if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
-                // 重新获取
-                console.log(chalk.blueBright('重新获取jira信息'))
-                data = await writeData(fileData, designatedBoard)
-            } else {
-                // 缓存中获取
-                console.log(chalk.blueBright('缓存中获取jira信息'))
-                data = fileData.baseData
-            }
-        } else { // 需要重新获取
-            console.log(chalk.blueBright('重新获取jira信息'))
-            data = await writeData(fileData, designatedBoard)
-        }
-    } else {
-        data = await writeData(fileData, designatedBoard)
-    }
+    data = await getJiraData(fileData, designatedBoard)
     // 执行交互命令选择获取的内容
     const sformData = getSformData(data, fileData.name, allData, designatedBoard)
     const ownList = sformData.perfect

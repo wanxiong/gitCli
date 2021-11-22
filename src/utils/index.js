@@ -93,3 +93,31 @@ export const writeData = async (fileData, designatedBoard) => {
     }
     
 }
+
+/**
+ * 
+*/
+export const getJiraData = async (fileData, designatedBoard) => {
+    let data = null
+    // 存在过期时间
+    if (fileData.expirationTime && fileData.startTime) {
+        if (designatedBoard === fileData.boardType) { // 看板类型相同 直接读取输
+            const nowData = +new Date()
+            if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
+                // 重新获取
+                console.log(chalk.greenBright('重新获取jira信息...'))
+                data = await writeData(fileData, designatedBoard)
+            } else {
+                // 缓存中获取
+                console.log(chalk.greenBright('从缓存中获取jira信息...'))
+                data = fileData.baseData
+            }
+        } else { // 需要重新获取
+            console.log(chalk.greenBright('初次获取jira信息...'))
+            data = await writeData(fileData, designatedBoard)
+        }
+    } else {
+        data = await writeData(fileData, designatedBoard)
+    }
+    return data
+} 
