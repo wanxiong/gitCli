@@ -129,9 +129,9 @@ const push = async (action, d) => {
         name: 'commitText',
         message: '请输入提交的备注信息',
     }])
+    const moduleTypeStr = moduleType.moduleType.length ? `(${moduleType.moduleType.toString()})` : ''
     // release(mdm-antd, mdm-creator): sform-4118 xxxxx
-    const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType.includes('skip') ? '' : formAnswer.sformType} ${commitMessage.commitText}`
-    
+    const completeText = `${pre.preType}${moduleTypeStr}: ${formAnswer.sformType.includes('skip') ? '' : formAnswer.sformType} ${commitMessage.commitText}`
     // console.log(chalk.green('\n最终提交文案：' + completeText + '\n'))
     const gitAddStr = '自定义';
     const gitAuto = '一键自动添加、提交、推送'
@@ -177,6 +177,8 @@ const push = async (action, d) => {
         execSync('git add *')
         console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`))
         execSync(`git commit -m "${completeText}" ${ignoreCommitType.ignoreCommit === '是' ? '--no-verify': ''}`)
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright('git pull'))
+        execSync('git pull')
         console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright('git push origin ' + `${branchName}`))
         execSync('git push origin ' + `${branchName}`)
         return
@@ -206,6 +208,8 @@ const push = async (action, d) => {
     // 推送远程
     if (gitPushType.pushType !== gitPushStr) {
         // 默认添加 执行添加
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright('git pull'))
+        execSync('git pull')
         console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(gitPushType.pushType))
         execSync('git push origin feature/3.2.19_SFORM_3678') 
         return
@@ -216,6 +220,8 @@ const push = async (action, d) => {
             message: '请输入git命令将文件推送到远程具体分支',
             default: 'git push orign ' + `${branchName}`
         }])
+        console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright('git pull'))
+        execSync('git pull')
         console.log(chalk.yellowBright('执行命令：'), chalk.cyanBright(customCommit.cusPush))
         execSync(customCommit.cusPush)
     }

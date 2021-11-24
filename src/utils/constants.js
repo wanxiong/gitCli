@@ -1,4 +1,4 @@
-export const VERSION = "1.2.2"
+export const VERSION = "1.2.4"
 export const pathUrl = 'baseConfig.json'
 export const defaultBoard = 'SFORM Sprint'
 export const typeList = [
@@ -42,16 +42,16 @@ export const typeList = [
 
 
 export const scopes = [
-  { name: 'mdm-antd' },
-  { name: 'mdm-antd-mobile' },
-  { name: 'mdm-creator' },
-  { name: 'mdm-stager' },
+  { name: 'mdm-antd'},
+  { name: 'mdm-antd-mobile'},
+  { name: 'mdm-creator'},
+  { name: 'mdm-stager'},
   { name: 'mdm-utils' },
-  { name: 'mdm-component-shared' },
+  { name: 'mdm-component-shared'  },
   { name: 'form-antd' },
-  { name: 'form-antd-mobile' },
+  { name: 'form-antd-mobile'  },
   { name: 'form-core' },
   { name: 'form-react' },
-  { name: 'form-request' },
-  { name: 'form-stager' },
+  { name: 'form-request'  },
+  { name: 'form-stager'  },
 ]
