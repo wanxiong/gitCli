@@ -129,6 +129,7 @@ const push = async (action, d) => {
         name: 'commitText',
         message: '请输入提交的备注信息',
     }])
+    console.log('`````````', formAnswer.sformType)
     // release(mdm-antd, mdm-creator): sform-4118 xxxxx
     const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType === 'skip' ? '' : formAnswer.sformType} ${commitMessage.commitText}`
     
