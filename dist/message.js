@@ -103,7 +103,7 @@ var message = /*#__PURE__*/function () {
           case 23:
             commitMessage = _context.sent;
             // release(mdm-antd, mdm-creator): sform-4118 xxxxx
-            completeText = "".concat(pre.preType).concat(moduleType.moduleType.lenght ? "(".concat(moduleType.moduleType, ")") : '', ": ").concat(formAnswer.sformType === 'skip' ? '' : formAnswer.sformType, " ").concat(commitMessage.commitText);
+            completeText = "".concat(pre.preType).concat(moduleType.moduleType.lenght ? "(".concat(moduleType.moduleType, ")") : '', ": ").concat(formAnswer.sformType.includes('skip') ? '' : formAnswer.sformType, " ").concat(commitMessage.commitText);
             console.log(_chalk["default"].yellowBright('\n请拷贝(最终提交文案)：'), _chalk["default"].greenBright(completeText + '\n'));
 
           case 26:

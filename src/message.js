@@ -61,7 +61,7 @@ const message = async (action, d) => {
         message: '请输入提交的备注信息',
     }])
     // release(mdm-antd, mdm-creator): sform-4118 xxxxx
-    const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType === 'skip' ? '' : formAnswer.sformType} ${commitMessage.commitText}`
+    const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType.includes('skip') ? '' : formAnswer.sformType} ${commitMessage.commitText}`
     
     console.log(chalk.yellowBright('\n请拷贝(最终提交文案)：'), chalk.greenBright(completeText + '\n'))
 }
