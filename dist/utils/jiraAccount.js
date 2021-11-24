@@ -94,7 +94,7 @@ var initAccount = /*#__PURE__*/function () {
                         boardBtn = _context.sent;
                         _context.next = 33;
                         return page.screenshot({
-                          path: process.cwd() + '/account.png'
+                          path: _path["default"].resolve(__dirname, '../account.png')
                         });
 
                       case 33:
@@ -139,12 +139,6 @@ var initAccount = /*#__PURE__*/function () {
                         break;
 
                       case 48:
-                        _context.next = 50;
-                        return page.screenshot({
-                          path: _path["default"].resolve(__dirname, '../account.png')
-                        });
-
-                      case 50:
                         hasBoard = boardList.filter(function (item) {
                           var text = item.innerHTML;
 
@@ -154,7 +148,7 @@ var initAccount = /*#__PURE__*/function () {
                         });
 
                         if (!hasBoard.length) {
-                          _context.next = 67;
+                          _context.next = 65;
                           break;
                         }
 
@@ -162,46 +156,46 @@ var initAccount = /*#__PURE__*/function () {
                         mat = reg.exec(hasBoard[0].originHref);
                         str = mat ? mat[1] : '';
                         params = '?rapidViewId=' + str;
-                        _context.next = 58;
+                        _context.next = 56;
                         return page["goto"](getListUrl + params);
 
-                      case 58:
+                      case 56:
                         respone = _context.sent;
-                        _context.next = 61;
+                        _context.next = 59;
                         return respone.json();
 
-                      case 61:
+                      case 59:
                         jsonData = _context.sent;
-                        _context.next = 64;
+                        _context.next = 62;
                         return browser.close();
 
-                      case 64:
+                      case 62:
                         resolve(jsonData);
-                        _context.next = 68;
+                        _context.next = 66;
                         break;
 
-                      case 67:
+                      case 65:
                         throw new Error('你没有相关的看板内容====' + account.designatedBoard.trim() + ',请重新选择看板');
 
-                      case 68:
-                        _context.next = 75;
+                      case 66:
+                        _context.next = 73;
                         break;
 
-                      case 70:
-                        _context.prev = 70;
+                      case 68:
+                        _context.prev = 68;
                         _context.t0 = _context["catch"](3);
-                        _context.next = 74;
+                        _context.next = 72;
                         return browser.close();
 
-                      case 74:
+                      case 72:
                         reject(_context.t0);
 
-                      case 75:
+                      case 73:
                       case "end":
                         return _context.stop();
                     }
                   }
-                }, _callee, null, [[3, 70]]);
+                }, _callee, null, [[3, 68]]);
               }));
 
               return function (_x2, _x3) {

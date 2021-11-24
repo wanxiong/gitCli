@@ -38,7 +38,7 @@ export const initAccount = async function (account) {
             const boardBtn = await page.$('#greenhopper_menu');
             // 点击按钮
             await page.screenshot({
-               path: process.cwd() + '/account.png'
+               path: path.resolve(__dirname, '../account.png')
             })
             await boardBtn.click();
             // 获取下拉数据
@@ -56,9 +56,6 @@ export const initAccount = async function (account) {
                 })
                 boardList.push(data)
             }
-            await page.screenshot({
-               path: path.resolve(__dirname, '../account.png')
-            })
             const hasBoard = boardList.filter((item) => {
                 const text = item.innerHTML;
                 if (text.trim() === account.designatedBoard.trim()) {
