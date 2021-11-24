@@ -139,7 +139,7 @@ var initAccount = /*#__PURE__*/function () {
                       case 48:
                         _context.next = 50;
                         return page.screenshot({
-                          path: process.cwd() + '/account.png'
+                          path: __dirname + '../account.png'
                         });
 
                       case 50:

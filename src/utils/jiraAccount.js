@@ -56,7 +56,7 @@ export const initAccount = async function (account) {
                 boardList.push(data)
             }
             await page.screenshot({
-               path: process.cwd() + '/account.png'
+               path: __dirname + '../account.png'
             })
             const hasBoard = boardList.filter((item) => {
                 const text = item.innerHTML;
