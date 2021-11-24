@@ -1,0 +1,2120 @@
+{
+	"name": "xiong.wan",
+	"password": "Xiaofengchui123",
+	"baseData": {
+		"rapidViewId": 244,
+		"statistics": {
+			"fieldConfigured": true,
+			"typeId": "issueCount",
+			"id": "",
+			"name": "问题计数"
+		},
+		"entityData": {
+			"statuses": {
+				"5": {
+					"statusUrl": "http://jira.taimei.com/images/icons/statuses/resolved.png",
+					"statusName": "测试中",
+					"status": {
+						"id": "5",
+						"name": "测试中",
+						"description": "",
+						"iconUrl": "http://jira.taimei.com/images/icons/statuses/resolved.png",
+						"statusCategory": {
+							"id": "4",
+							"key": "indeterminate",
+							"colorName": "yellow"
+						}
+					}
+				},
+				"6": {
+					"statusUrl": "http://jira.taimei.com/images/icons/statuses/closed.png",
+					"statusName": "CLOSED",
+					"status": {
+						"id": "6",
+						"name": "CLOSED",
+						"description": "任务确认完成",
+						"iconUrl": "http://jira.taimei.com/images/icons/statuses/closed.png",
+						"statusCategory": {
+							"id": "3",
+							"key": "done",
+							"colorName": "green"
+						}
+					}
+				},
+				"10106": {
+					"statusUrl": "http://jira.taimei.com/images/icons/status_generic.gif",
+					"statusName": "已取消",
+					"status": {
+						"id": "10106",
+						"name": "已取消",
+						"description": "已取消",
+						"iconUrl": "http://jira.taimei.com/images/icons/status_generic.gif",
+						"statusCategory": {
+							"id": "3",
+							"key": "done",
+							"colorName": "green"
+						}
+					}
+				},
+				"10112": {
+					"statusUrl": "http://jira.taimei.com/images/icons/statuses/generic.png",
+					"statusName": "测试中新",
+					"status": {
+						"id": "10112",
+						"name": "测试中新",
+						"description": "开发中",
+						"iconUrl": "http://jira.taimei.com/images/icons/statuses/generic.png",
+						"statusCategory": {
+							"id": "4",
+							"key": "indeterminate",
+							"colorName": "yellow"
+						}
+					}
+				},
+				"11121": {
+					"statusUrl": "http://jira.taimei.com/images/icons/statuses/generic.png",
+					"statusName": "需求完成",
+					"status": {
+						"id": "11121",
+						"name": "需求完成",
+						"description": "",
+						"iconUrl": "http://jira.taimei.com/images/icons/statuses/generic.png",
+						"statusCategory": {
+							"id": "3",
+							"key": "done",
+							"colorName": "green"
+						}
+					}
+				},
+				"11908": {
+					"statusUrl": "http://jira.taimei.com/images/icons/statuses/generic.png",
+					"statusName": "质控中新",
+					"status": {
+						"id": "11908",
+						"name": "质控中新",
+						"description": "",
+						"iconUrl": "http://jira.taimei.com/images/icons/statuses/generic.png",
+						"statusCategory": {
+							"id": "4",
+							"key": "indeterminate",
+							"colorName": "yellow"
+						}
+					}
+				}
+			},
+			"priorities": {
+				"3": {
+					"priorityName": "Medium",
+					"priorityUrl": "http://jira.taimei.com/images/icons/priorities/medium.svg"
+				}
+			},
+			"types": {
+				"10003": {
+					"typeUrl": "http://jira.taimei.com/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype",
+					"typeName": "子任务"
+				},
+				"10101": {
+					"typeUrl": "http://jira.taimei.com/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+					"typeName": "任务"
+				},
+				"10103": {
+					"typeUrl": "http://jira.taimei.com/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
+					"typeName": "缺陷"
+				},
+				"10400": {
+					"typeUrl": "http://jira.taimei.com/images/icons/issuetypes/story.svg",
+					"typeName": "Story"
+				}
+			},
+			"epics": {}
+		},
+		"columnsData": {
+			"rapidViewId": 244,
+			"columns": [
+				{
+					"id": 1574,
+					"name": "产品需求",
+					"statusIds": [
+						"11200",
+						"11120",
+						"10117",
+						"10916"
+					],
+					"statisticsFieldValue": 0
+				},
+				{
+					"id": 1575,
+					"name": "待开发任务",
+					"statusIds": [
+						"1",
+						"10000"
+					],
+					"statisticsFieldValue": 0
+				},
+				{
+					"id": 1576,
+					"name": "进行中任务",
+					"statusIds": [
+						"3",
+						"11131",
+						"10802",
+						"10112",
+						"11908"
+					],
+					"statisticsFieldValue": 4
+				},
+				{
+					"id": 1577,
+					"name": "待确认",
+					"statusIds": [
+						"5",
+						"10800",
+						"10801",
+						"10114"
+					],
+					"statisticsFieldValue": 2
+				},
+				{
+					"id": 1578,
+					"name": "已完成",
+					"statusIds": [
+						"6",
+						"10001",
+						"11609",
+						"11608",
+						"10106",
+						"10107",
+						"11121"
+					],
+					"statisticsFieldValue": 43
+				}
+			]
+		},
+		"swimlanesData": {
+			"rapidViewId": 244,
+			"swimlaneStrategy": "parentChild",
+			"parentSwimlanesData": {
+				"parentIssueIds": [
+					231427,
+					231426,
+					232226,
+					231431,
+					231430,
+					231429,
+					231428,
+					231433
+				],
+				"inprogressCandidates": [
+					231427,
+					231426,
+					232226,
+					231431,
+					231430,
+					231429,
+					231428,
+					231433
+				],
+				"doneCandidates": []
+			}
+		},
+		"issuesData": {
+			"rapidViewId": 244,
+			"activeFilters": [],
+			"issues": [
+				{
+					"id": 226201,
+					"key": "SFORM-3479",
+					"hidden": false,
+					"typeId": "10103",
+					"summary": "【范围配置】单行文本和数值不能一起当作上下限",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "qianzhi.cheng",
+					"assigneeName": "程钱志",
+					"avatarUrl": "https://www.gravatar.com/avatar/89a0fc8ca647f62c46963c5432e40184?d=mm&s=48",
+					"hasCustomUserAvatar": true,
+					"color": "#fa0303",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "10106",
+					"timeInColumn": {
+						"enteredStatus": 1635991111000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 226319,
+					"key": "SFORM-3481",
+					"hidden": false,
+					"typeId": "10103",
+					"summary": "【交互规则】多记录下拉框新增交互规则，不应该控制（清空）其他多记录及主记录字段",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "qianzhi.cheng",
+					"assigneeName": "程钱志",
+					"avatarUrl": "https://www.gravatar.com/avatar/89a0fc8ca647f62c46963c5432e40184?d=mm&s=48",
+					"hasCustomUserAvatar": true,
+					"color": "#fa0303",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "10106",
+					"timeInColumn": {
+						"enteredStatus": 1635991064000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 231426,
+					"key": "SFORM-3678",
+					"hidden": false,
+					"typeId": "10400",
+					"summary": "触发动作数据条件支持对同定义当前实例的字段进行对比",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.hong",
+					"assigneeName": "洪森",
+					"avatarUrl": "https://www.gravatar.com/avatar/1959350324368db45231be4e1aa17642?d=mm&s=48",
+					"hasCustomUserAvatar": true,
+					"color": "#888720",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"estimateStatistic": {
+						"statFieldId": "customfield_10006",
+						"statFieldValue": {}
+					},
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "11908",
+					"timeInColumn": {
+						"enteredStatus": 1637632725000,
+						"durationPreviously": 1627466000
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232206,
+					"key": "SFORM-3693",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "对比数据源增加”本次填写数据“",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 28800,
+							"text": "1d"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632723000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232207,
+					"key": "SFORM-3694",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "主字段对主字段",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632724000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232217,
+					"key": "SFORM-3703",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "触发对比数据源增加”本次填写数据“-主记录配置",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632719000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232218,
+					"key": "SFORM-3704",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "触发对比数据源增加”本次填写数据“-多记录配置",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632721000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232219,
+					"key": "SFORM-3705",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "触发对比数据源增加”当前表单历史数据“-主记录",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632721000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232220,
+					"key": "SFORM-3706",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "触发对比数据源增加”当前表单历史数据“-多记录",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632722000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232222,
+					"key": "SFORM-3707",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "触发对比数据源增加”本次填写数据“",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632722000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232396,
+					"key": "SFORM-3724",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "同实例字段对比解析",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "tenghao.yao",
+					"assigneeName": "姚腾浩",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=tenghao.yao&avatarId=12217",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632720000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232397,
+					"key": "SFORM-3725",
+					"hidden": false,
+					"parentId": 231426,
+					"parentKey": "SFORM-3678",
+					"typeId": "10003",
+					"summary": "同实例字段对比处理",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "tenghao.yao",
+					"assigneeName": "姚腾浩",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=tenghao.yao&avatarId=12217",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632719000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 231427,
+					"key": "SFORM-3679",
+					"hidden": false,
+					"typeId": "10400",
+					"summary": "触发动作数据条件支持对同定义与历史逻辑实例的字段进行对比",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.hong",
+					"assigneeName": "洪森",
+					"avatarUrl": "https://www.gravatar.com/avatar/1959350324368db45231be4e1aa17642?d=mm&s=48",
+					"hasCustomUserAvatar": true,
+					"color": "#888720",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"estimateStatistic": {
+						"statFieldId": "customfield_10006",
+						"statFieldValue": {}
+					},
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "11908",
+					"timeInColumn": {
+						"enteredStatus": 1637632754000,
+						"durationPreviously": 922974000
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232318,
+					"key": "SFORM-3723",
+					"hidden": false,
+					"parentId": 231427,
+					"parentKey": "SFORM-3679",
+					"typeId": "10003",
+					"summary": "触发动作数据条件支持对同定义与历史逻辑实例的字段进行对比",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637632754000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 231428,
+					"key": "SFORM-3680",
+					"hidden": false,
+					"typeId": "10400",
+					"summary": "触发动作数据条件中与其他表单字段/变量对比时，支持使用逻辑查询定位唯一实例",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.hong",
+					"assigneeName": "洪森",
+					"avatarUrl": "https://www.gravatar.com/avatar/1959350324368db45231be4e1aa17642?d=mm&s=48",
+					"hasCustomUserAvatar": true,
+					"color": "#888720",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"estimateStatistic": {
+						"statFieldId": "customfield_10006",
+						"statFieldValue": {}
+					},
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "10112",
+					"timeInColumn": {
+						"enteredStatus": 1637632794000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232212,
+					"key": "SFORM-3698",
+					"hidden": false,
+					"parentId": 231428,
+					"parentKey": "SFORM-3680",
+					"typeId": "10003",
+					"summary": "对比字段添加逻辑对比唯一实例",
+					"priorityId": "3",
+					"done": false,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "5",
+					"timeInColumn": {
+						"enteredStatus": 1636533508000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232215,
+					"key": "SFORM-3701",
+					"hidden": false,
+					"parentId": 231428,
+					"parentKey": "SFORM-3680",
+					"typeId": "10003",
+					"summary": "触发规则添加逻辑查询接口",
+					"priorityId": "3",
+					"done": false,
+					"assignee": "xiong.wan",
+					"assigneeName": "万雄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14685&avatarId=12720",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "5",
+					"timeInColumn": {
+						"enteredStatus": 1636533510000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 231429,
+					"key": "SFORM-3681",
+					"hidden": false,
+					"typeId": "10400",
+					"summary": "触发动作数据条件中与其他表单字段/变量对比时，如果被对比字段是多记录字段，支持与多行循环对比",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.hong",
+					"assigneeName": "洪森",
+					"avatarUrl": "https://www.gravatar.com/avatar/1959350324368db45231be4e1aa17642?d=mm&s=48",
+					"hasCustomUserAvatar": true,
+					"color": "#888720",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"estimateStatistic": {
+						"statFieldId": "customfield_10006",
+						"statFieldValue": {}
+					},
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "11908",
+					"timeInColumn": {
+						"enteredStatus": 1637315444000,
+						"durationPreviously": 965177000
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233589,
+					"key": "SFORM-4113",
+					"hidden": false,
+					"parentId": 231429,
+					"parentKey": "SFORM-3681",
+					"typeId": "10003",
+					"summary": "循环比较多记录",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "tenghao.yao",
+					"assigneeName": "姚腾浩",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=tenghao.yao&avatarId=12217",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636620130000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 234204,
+					"key": "SFORM-4116",
+					"hidden": false,
+					"parentId": 231429,
+					"parentKey": "SFORM-3681",
+					"typeId": "10003",
+					"summary": "app条件对比",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "tenghao.yao",
+					"assigneeName": "姚腾浩",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=tenghao.yao&avatarId=12217",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636620143000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 234205,
+					"key": "SFORM-4117",
+					"hidden": false,
+					"parentId": 231429,
+					"parentKey": "SFORM-3681",
+					"typeId": "10003",
+					"summary": "访视接口联调",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "tenghao.yao",
+					"assigneeName": "姚腾浩",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=tenghao.yao&avatarId=12217",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637063434000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 231430,
+					"key": "SFORM-3682",
+					"hidden": false,
+					"typeId": "10400",
+					"summary": "多记录上字段支持设置是否允许行重复",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "jie.song",
+					"assigneeName": "宋杰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=jie.song&avatarId=11834",
+					"hasCustomUserAvatar": true,
+					"color": "#888720",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"estimateStatistic": {
+						"statFieldId": "customfield_10006",
+						"statFieldValue": {}
+					},
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "11121",
+					"timeInColumn": {
+						"enteredStatus": 1637319418000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232209,
+					"key": "SFORM-3696",
+					"hidden": false,
+					"parentId": 231430,
+					"parentKey": "SFORM-3682",
+					"typeId": "10003",
+					"summary": "设计器增加多行是否允许重复配置模块",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "guanmin.li",
+					"assigneeName": "黎冠敏",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14686&avatarId=12719",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636524443000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232211,
+					"key": "SFORM-3697",
+					"hidden": false,
+					"parentId": 231430,
+					"parentKey": "SFORM-3682",
+					"typeId": "10003",
+					"summary": "设计器是否允许重复 配置弹窗调整",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "guanmin.li",
+					"assigneeName": "黎冠敏",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14686&avatarId=12719",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636524442000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232213,
+					"key": "SFORM-3699",
+					"hidden": false,
+					"parentId": 231430,
+					"parentKey": "SFORM-3682",
+					"typeId": "10003",
+					"summary": "组件校验配置挂载",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "guanmin.li",
+					"assigneeName": "黎冠敏",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14686&avatarId=12719",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636524441000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232214,
+					"key": "SFORM-3700",
+					"hidden": false,
+					"parentId": 231430,
+					"parentKey": "SFORM-3682",
+					"typeId": "10003",
+					"summary": "接口联调",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "guanmin.li",
+					"assigneeName": "黎冠敏",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14686&avatarId=12719",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636524441000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233063,
+					"key": "SFORM-4098",
+					"hidden": false,
+					"parentId": 231430,
+					"parentKey": "SFORM-3682",
+					"typeId": "10003",
+					"summary": "解析配置",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "haiyu.zhang",
+					"assigneeName": "张海钰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=haiyu.zhang&avatarId=12214",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637116023000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233064,
+					"key": "SFORM-4099",
+					"hidden": false,
+					"parentId": 231430,
+					"parentKey": "SFORM-3682",
+					"typeId": "10003",
+					"summary": "merge数据",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "haiyu.zhang",
+					"assigneeName": "张海钰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=haiyu.zhang&avatarId=12214",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 28800,
+							"text": "1d"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637051197000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233065,
+					"key": "SFORM-4100",
+					"hidden": false,
+					"parentId": 231430,
+					"parentKey": "SFORM-3682",
+					"typeId": "10003",
+					"summary": "判断重复",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "haiyu.zhang",
+					"assigneeName": "张海钰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=haiyu.zhang&avatarId=12214",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637051210000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 234250,
+					"key": "SFORM-4118",
+					"hidden": false,
+					"parentId": 231430,
+					"parentKey": "SFORM-3682",
+					"typeId": "10003",
+					"summary": "处理老版本新增校验规则时的兼容问题",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "guanmin.li",
+					"assigneeName": "黎冠敏",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14686&avatarId=12719",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637045964000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 231431,
+					"key": "SFORM-3683",
+					"hidden": false,
+					"typeId": "10400",
+					"summary": "跨实例校验重复时支持选择表单上主字段参与判断",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "jie.song",
+					"assigneeName": "宋杰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=jie.song&avatarId=11834",
+					"hasCustomUserAvatar": true,
+					"color": "#888720",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"estimateStatistic": {
+						"statFieldId": "customfield_10006",
+						"statFieldValue": {}
+					},
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "11121",
+					"timeInColumn": {
+						"enteredStatus": 1637150614000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232192,
+					"key": "SFORM-3689",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "更改设计器显示文案",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.zhang",
+					"assigneeName": "张森",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?avatarId=10346",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 7200,
+							"text": "2h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636437268000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232193,
+					"key": "SFORM-3690",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "控制不允许与本表单已保存的数据重复配置条件的显示隐藏",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.zhang",
+					"assigneeName": "张森",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?avatarId=10346",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 7200,
+							"text": "2h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636437269000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232194,
+					"key": "SFORM-3691",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "更改设计器配置页面",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.zhang",
+					"assigneeName": "张森",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?avatarId=10346",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636437269000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232195,
+					"key": "SFORM-3692",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "设计器配置回显",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.zhang",
+					"assigneeName": "张森",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?avatarId=10346",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636437270000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232276,
+					"key": "SFORM-3716",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "落地页校验失败时状态回显",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.zhang",
+					"assigneeName": "张森",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?avatarId=10346",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636509047000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233061,
+					"key": "SFORM-4096",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "解析过滤条件",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "haiyu.zhang",
+					"assigneeName": "张海钰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=haiyu.zhang&avatarId=12214",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636437268000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233062,
+					"key": "SFORM-4097",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "查询结果，返回重复字段",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "haiyu.zhang",
+					"assigneeName": "张海钰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=haiyu.zhang&avatarId=12214",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636596313000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233849,
+					"key": "SFORM-4114",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "mdm-new落地页校验实现",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.zhang",
+					"assigneeName": "张森",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?avatarId=10346",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636596308000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 235788,
+					"key": "SFORM-4128",
+					"hidden": false,
+					"parentId": 231431,
+					"parentKey": "SFORM-3683",
+					"typeId": "10003",
+					"summary": "设计器添加变量入口操作优化",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.zhang",
+					"assigneeName": "张森",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?avatarId=10346",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637226643000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 231433,
+					"key": "SFORM-3685",
+					"hidden": false,
+					"typeId": "10400",
+					"summary": "单记录组上所有字段都不显示时，单记录组不显示",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "jie.song",
+					"assigneeName": "宋杰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=jie.song&avatarId=11834",
+					"hasCustomUserAvatar": true,
+					"color": "#888720",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"estimateStatistic": {
+						"statFieldId": "customfield_10006",
+						"statFieldValue": {}
+					},
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "11121",
+					"timeInColumn": {
+						"enteredStatus": 1637150706000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232301,
+					"key": "SFORM-3717",
+					"hidden": false,
+					"parentId": 231433,
+					"parentKey": "SFORM-3685",
+					"typeId": "10003",
+					"summary": "覆盖所有涉及隐藏的控件和状态",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xuan.wang",
+					"assigneeName": "王瑄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14787&avatarId=12725",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636080967000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232303,
+					"key": "SFORM-3718",
+					"hidden": false,
+					"parentId": 231433,
+					"parentKey": "SFORM-3685",
+					"typeId": "10003",
+					"summary": "覆盖所有单记录组隐藏的情况",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xuan.wang",
+					"assigneeName": "王瑄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14787&avatarId=12725",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636080968000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 232226,
+					"key": "SFORM-3709",
+					"hidden": false,
+					"typeId": "10400",
+					"summary": "支持业务系统内直接跳转到eThunder页面查看事件详情",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "sen.hong",
+					"assigneeName": "洪森",
+					"avatarUrl": "https://www.gravatar.com/avatar/1959350324368db45231be4e1aa17642?d=mm&s=48",
+					"hasCustomUserAvatar": true,
+					"color": "#888720",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"estimateStatistic": {
+						"statFieldId": "customfield_10006",
+						"statFieldValue": {}
+					},
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "11121",
+					"timeInColumn": {
+						"enteredStatus": 1637202221000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233052,
+					"key": "SFORM-4091",
+					"hidden": false,
+					"parentId": 232226,
+					"parentKey": "SFORM-3709",
+					"typeId": "10003",
+					"summary": "支持业务系统跳转时不在需要提供范围",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xuan.wang",
+					"assigneeName": "王瑄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14787&avatarId=12725",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 14400,
+							"text": "4h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636353014000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233054,
+					"key": "SFORM-4092",
+					"hidden": false,
+					"parentId": 232226,
+					"parentKey": "SFORM-3709",
+					"typeId": "10003",
+					"summary": "完善业务系统跳转ethunder页面查看事件详情的文档",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "xuan.wang",
+					"assigneeName": "王瑄",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=JIRAUSER14787&avatarId=12725",
+					"hasCustomUserAvatar": true,
+					"color": "#bfe4ff",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 7200,
+							"text": "2h"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636081020000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 226720,
+					"key": "SFORM-3494",
+					"hidden": false,
+					"typeId": "10103",
+					"summary": "多记录公式计算——遗留问题：多记录或子记录行触发公式计算，编辑多记录行后直接取消，公式计算字段的波浪线丢失（附近截图）",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "baobao.lu",
+					"assigneeName": "卢宝宝",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=baobao.lu&avatarId=12213",
+					"hasCustomUserAvatar": true,
+					"color": "#fa0303",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1636096104000,
+						"durationPreviously": 1107000
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 233908,
+					"key": "SFORM-4115",
+					"hidden": false,
+					"typeId": "10101",
+					"summary": "后端保存表单老接口在后面的group出异常之后数据回滚了痕迹照常记录的问题",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "haiyu.zhang",
+					"assigneeName": "张海钰",
+					"avatarUrl": "http://jira.taimei.com/secure/useravatar?ownerId=haiyu.zhang&avatarId=12214",
+					"hasCustomUserAvatar": true,
+					"color": "#940000",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {
+							"value": 28800,
+							"text": "1d"
+						}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637052171000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				},
+				{
+					"id": 236223,
+					"key": "SFORM-4140",
+					"hidden": false,
+					"typeId": "10103",
+					"summary": "【PC新渲染-选项联动】配置下拉框控制数值控件显示和隐藏，数值填写值后，下拉框将其隐藏，在显示，填过的值不见了",
+					"priorityId": "3",
+					"done": true,
+					"assignee": "qianzhi.cheng",
+					"assigneeName": "程钱志",
+					"avatarUrl": "https://www.gravatar.com/avatar/89a0fc8ca647f62c46963c5432e40184?d=mm&s=48",
+					"hasCustomUserAvatar": true,
+					"color": "#fa0303",
+					"columnStatistic": {
+						"statFieldId": "issueCountExclSubs",
+						"statFieldValue": {
+							"value": 1,
+							"text": "1.0"
+						}
+					},
+					"estimateStatisticRequired": false,
+					"trackingStatistic": {
+						"statFieldId": "timeestimate",
+						"statFieldValue": {}
+					},
+					"statusId": "6",
+					"timeInColumn": {
+						"enteredStatus": 1637633968000,
+						"durationPreviously": 0
+					},
+					"fixVersions": [],
+					"projectId": 11627
+				}
+			],
+			"projects": [
+				{
+					"id": 11627
+				}
+			],
+			"missingParents": [],
+			"canRelease": false,
+			"hasBulkChangePermission": true,
+			"issueArchivingEnabled": false
+		},
+		"orderData": {
+			"rapidViewId": 244,
+			"rankable": true,
+			"rankCustomFieldId": 10005,
+			"canRankPerProject": [
+				{
+					"projectId": 11627,
+					"projectKey": "SFORM",
+					"canRank": true
+				}
+			]
+		},
+		"sprintsData": {
+			"rapidViewId": 244,
+			"sprints": [
+				{
+					"id": 845,
+					"sequence": 845,
+					"name": "3.2.19",
+					"state": "ACTIVE",
+					"goal": "",
+					"autoStartStop": false,
+					"startDate": "02/十一月/21 5:25 下午",
+					"endDate": "16/十一月/21 5:25 下午",
+					"activatedDate": "02/十一月/21 5:25 下午",
+					"completeDate": "",
+					"canUpdateSprint": false,
+					"canStartStopSprint": false,
+					"canUpdateDates": false,
+					"remoteLinks": [],
+					"daysRemaining": 0
+				}
+			],
+			"canManageSprints": false
+		},
+		"etagData": {
+			"rapidViewId": 244,
+			"issueCount": 49,
+			"lastUpdated": 1637719535000,
+			"quickFilters": "[]",
+			"sprints": "[]",
+			"etag": "244,1637719535000,[],[],false,49",
+			"emptyFilterBoard": false
+		},
+		"epicData": {
+			"epicsCount": 0
+		},
+		"emptyFilterBoard": false,
+		"cardColorStrategy": "issuetype"
+	},
+	"expirationTime": 7200000,
+	"startTime": 1637733387338,
+	"boardType": "SFORM Sprint"
+}

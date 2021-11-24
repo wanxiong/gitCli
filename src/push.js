@@ -85,8 +85,12 @@ const push = async (action, d) => {
     const sformData = getSformData(data, fileData.name, allData, designatedBoard)
     const ownList = sformData.perfect
     if (!ownList.length) {
-        throw new Error(chalk.red('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据'))
+        console.log(chalk.redBright('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据'))
     }
+    ownList.unshift({
+        value: 'skip',
+        name: `跳过`
+    })
     // 本次提交属于新增还是啥
     let pre = await inquirer.prompt([{
         type: 'rawlist', 
@@ -126,7 +130,7 @@ const push = async (action, d) => {
         message: '请输入提交的备注信息',
     }])
     // release(mdm-antd, mdm-creator): sform-4118 xxxxx
-    const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType} ${commitMessage.commitText}`
+    const completeText = `${pre.preType}${moduleType.moduleType.lenght ? `(${moduleType.moduleType})` : ''}: ${formAnswer.sformType === 'skip' ? '' : formAnswer.sformType} ${commitMessage.commitText}`
     
     // console.log(chalk.green('\n最终提交文案：' + completeText + '\n'))
     const gitAddStr = '自定义';

@@ -117,14 +117,15 @@ var push = /*#__PURE__*/function () {
             sformData = getSformData(data, fileData.name, allData, designatedBoard);
             ownList = sformData.perfect;
 
-            if (ownList.length) {
-              _context.next = 13;
-              break;
+            if (!ownList.length) {
+              console.log(_chalk["default"].redBright('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据'));
             }
 
-            throw new Error(_chalk["default"].red('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据'));
+            ownList.unshift({
+              value: 'skip',
+              name: "\u8DF3\u8FC7"
+            }); // 本次提交属于新增还是啥
 
-          case 13:
             _context.next = 15;
             return _inquirer["default"].prompt([{
               type: 'rawlist',
@@ -177,7 +178,7 @@ var push = /*#__PURE__*/function () {
           case 24:
             commitMessage = _context.sent;
             // release(mdm-antd, mdm-creator): sform-4118 xxxxx
-            completeText = "".concat(pre.preType).concat(moduleType.moduleType.lenght ? "(".concat(moduleType.moduleType, ")") : '', ": ").concat(formAnswer.sformType, " ").concat(commitMessage.commitText); // console.log(chalk.green('\n最终提交文案：' + completeText + '\n'))
+            completeText = "".concat(pre.preType).concat(moduleType.moduleType.lenght ? "(".concat(moduleType.moduleType, ")") : '', ": ").concat(formAnswer.sformType === 'skip' ? '' : formAnswer.sformType, " ").concat(commitMessage.commitText); // console.log(chalk.green('\n最终提交文案：' + completeText + '\n'))
 
             gitAddStr = '自定义';
             gitAuto = '一键自动添加、提交、推送'; // 添加暂缓命令

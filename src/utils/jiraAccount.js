@@ -1,6 +1,7 @@
 // const puppeteer = require('puppeteer');
 // const puppeteer = require('puppeteer');
 import puppeteer from 'puppeteer'
+import path from 'path'
 
 const getListUrl = 'http://jira.taimei.com/rest/greenhopper/1.0/xboard/work/allData.json'
 
@@ -56,7 +57,7 @@ export const initAccount = async function (account) {
                 boardList.push(data)
             }
             await page.screenshot({
-               path: __dirname + '../account.png'
+               path: path.resolve(__dirname, '../account.png')
             })
             const hasBoard = boardList.filter((item) => {
                 const text = item.innerHTML;

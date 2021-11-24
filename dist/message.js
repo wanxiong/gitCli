@@ -42,14 +42,15 @@ var message = /*#__PURE__*/function () {
             sformData = (0, _push.getSformData)(data, fileData.name, allData, designatedBoard);
             ownList = sformData.perfect;
 
-            if (ownList.length) {
-              _context.next = 12;
-              break;
+            if (!ownList.length) {
+              console.log(_chalk["default"].redBright('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据')); // throw new Error(chalk.red('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据'))
             }
 
-            throw new Error(_chalk["default"].red('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据'));
+            ownList.unshift({
+              value: 'skip',
+              name: "\u8DF3\u8FC7"
+            }); // 本次提交属于新增还是啥
 
-          case 12:
             _context.next = 14;
             return _inquirer["default"].prompt([{
               type: 'rawlist',
@@ -102,7 +103,7 @@ var message = /*#__PURE__*/function () {
           case 23:
             commitMessage = _context.sent;
             // release(mdm-antd, mdm-creator): sform-4118 xxxxx
-            completeText = "".concat(pre.preType).concat(moduleType.moduleType.lenght ? "(".concat(moduleType.moduleType, ")") : '', ": ").concat(formAnswer.sformType, " ").concat(commitMessage.commitText);
+            completeText = "".concat(pre.preType).concat(moduleType.moduleType.lenght ? "(".concat(moduleType.moduleType, ")") : '', ": ").concat(formAnswer.sformType === 'skip' ? '' : formAnswer.sformType, " ").concat(commitMessage.commitText);
             console.log(_chalk["default"].yellowBright('\n请拷贝(最终提交文案)：'), _chalk["default"].greenBright(completeText + '\n'));
 
           case 26:

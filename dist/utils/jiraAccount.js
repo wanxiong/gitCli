@@ -13,6 +13,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _puppeteer = _interopRequireDefault(require("puppeteer"));
 
+var _path = _interopRequireDefault(require("path"));
+
 // const puppeteer = require('puppeteer');
 // const puppeteer = require('puppeteer');
 var getListUrl = 'http://jira.taimei.com/rest/greenhopper/1.0/xboard/work/allData.json';
@@ -139,7 +141,7 @@ var initAccount = /*#__PURE__*/function () {
                       case 48:
                         _context.next = 50;
                         return page.screenshot({
-                          path: __dirname + '../account.png'
+                          path: _path["default"].resolve(__dirname, '../account.png')
                         });
 
                       case 50:
