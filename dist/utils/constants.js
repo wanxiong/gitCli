@@ -52,6 +52,8 @@ var scopes = [{
 }, {
   name: 'mdm-component-shared'
 }, {
+  name: 'mdm-search-table'
+}, {
   name: 'form-antd'
 }, {
   name: 'form-antd-mobile'

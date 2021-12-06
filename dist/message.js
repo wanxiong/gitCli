@@ -20,7 +20,7 @@ var ora = require('ora');
 
 var message = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(action, d) {
-    var designatedBoard, allData, fileData, data, sformData, ownList, pre, moduleType, formAnswer, commitMessage, completeText;
+    var designatedBoard, allData, fileData, data, sformData, ownList, pre, moduleType, formAnswer, commitMessage, moduleStr, completeText;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -103,10 +103,11 @@ var message = /*#__PURE__*/function () {
           case 23:
             commitMessage = _context.sent;
             // release(mdm-antd, mdm-creator): sform-4118 xxxxx
-            completeText = "".concat(pre.preType).concat(moduleType.moduleType.lenght ? "(".concat(moduleType.moduleType, ")") : '', ": ").concat(formAnswer.sformType.includes('skip') ? '' : formAnswer.sformType, " ").concat(commitMessage.commitText);
+            moduleStr = moduleType.moduleType.toString();
+            completeText = "".concat(pre.preType).concat(moduleStr ? "(".concat(moduleStr, ")") : '', ": ").concat(formAnswer.sformType.includes('skip') ? '' : formAnswer.sformType, " ").concat(commitMessage.commitText);
             console.log(_chalk["default"].yellowBright('\n请拷贝(最终提交文案)：'), _chalk["default"].greenBright(completeText + '\n'));
 
-          case 26:
+          case 27:
           case "end":
             return _context.stop();
         }

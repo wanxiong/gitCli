@@ -18,11 +18,11 @@
   "author": "xiong.wan",
   "license": "ISC",
   "dependencies": {
-    "@babel/runtime": "^7.16.3",
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
     "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "cross-spawn": "^7.0.3",

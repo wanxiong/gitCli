@@ -48,6 +48,7 @@ export const scopes = [
   { name: 'mdm-stager'},
   { name: 'mdm-utils' },
   { name: 'mdm-component-shared'  },
+  { name: 'mdm-search-table'  },
   { name: 'form-antd' },
   { name: 'form-antd-mobile'  },
   { name: 'form-core' },
