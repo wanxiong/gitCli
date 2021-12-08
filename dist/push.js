@@ -93,7 +93,7 @@ exports.getSformData = getSformData;
 
 var push = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(action, d) {
-    var designatedBoard, allData, fileData, data, branchName, sformData, ownList, pre, moduleType, formAnswer, commitMessage, moduleTypeStr, completeText, gitAddStr, gitAuto, gitAddType, ignoreCommitType, customCommit, gitPushStr, gitPushType, _customCommit;
+    var designatedBoard, allData, localConfig, fileData, data, branchName, sformData, ownList, pre, moduleType, formAnswer, commitMessage, moduleTypeStr, completeText, gitAddStr, gitAuto, gitAddType, ignoreCommitType, customCommit, gitPushStr, gitPushType, _customCommit;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -101,20 +101,25 @@ var push = /*#__PURE__*/function () {
           case 0:
             designatedBoard = d.designatedBoard, allData = d.allData;
             _context.next = 3;
-            return (0, _index.getGitFile)();
+            return (0, _index.getLocalConfigFile)(process.cwd(), _constants.configFileName);
 
           case 3:
+            localConfig = _context.sent;
+            _context.next = 6;
+            return (0, _index.getGitFile)();
+
+          case 6:
             fileData = _context.sent;
             data = {};
-            branchName = (0, _index.getHeadBranch)(); // 存在过期时间
+            branchName = (0, _index.getHeadBranch)(process.cwd()); // 存在过期时间
 
-            _context.next = 8;
-            return (0, _index.getJiraData)(fileData, designatedBoard);
+            _context.next = 11;
+            return (0, _index.getJiraData)(fileData, designatedBoard, localConfig);
 
-          case 8:
+          case 11:
             data = _context.sent;
             // 执行交互命令选择获取的内容
-            sformData = getSformData(data, fileData.name, allData, designatedBoard);
+            sformData = getSformData(data, fileData.name, allData || localConfig.lookAll, designatedBoard);
             ownList = sformData.perfect;
 
             if (!ownList.length) {
@@ -126,29 +131,29 @@ var push = /*#__PURE__*/function () {
               name: "\u8DF3\u8FC7"
             }); // 本次提交属于新增还是啥
 
-            _context.next = 15;
+            _context.next = 18;
             return _inquirer["default"].prompt([{
               type: 'rawlist',
               name: 'preType',
               message: '请选择更改类型（回车确认）',
-              choices: _constants.typeList,
+              choices: _constants.typeList.concat(localConfig.typeList || []),
               pageSize: 10
             }]);
 
-          case 15:
+          case 18:
             pre = _context.sent;
-            _context.next = 18;
+            _context.next = 21;
             return _inquirer["default"].prompt([{
               type: 'checkbox',
               name: 'moduleType',
               message: '请选择模块范围（空格选中、可回车跳过）',
-              choices: _constants.scopes,
+              choices: _constants.scopes.concat(localConfig.scopes || []),
               pageSize: 20
             }]);
 
-          case 18:
+          case 21:
             moduleType = _context.sent;
-            _context.next = 21;
+            _context.next = 24;
             return _inquirer["default"].prompt([{
               type: 'checkbox',
               name: 'sformType',
@@ -166,16 +171,16 @@ var push = /*#__PURE__*/function () {
               }
             }]);
 
-          case 21:
+          case 24:
             formAnswer = _context.sent;
-            _context.next = 24;
+            _context.next = 27;
             return _inquirer["default"].prompt([{
               type: 'input',
               name: 'commitText',
               message: '请输入提交的备注信息'
             }]);
 
-          case 24:
+          case 27:
             commitMessage = _context.sent;
             moduleTypeStr = moduleType.moduleType.length ? "(".concat(moduleType.moduleType.toString(), ")") : ''; // release(mdm-antd, mdm-creator): sform-4118 xxxxx
 
@@ -184,7 +189,7 @@ var push = /*#__PURE__*/function () {
             gitAddStr = '自定义';
             gitAuto = '一键自动添加、提交、推送'; // 添加暂缓命令
 
-            _context.next = 31;
+            _context.next = 34;
             return _inquirer["default"].prompt([{
               type: 'rawlist',
               name: 'addType',
@@ -195,9 +200,9 @@ var push = /*#__PURE__*/function () {
               })
             }]);
 
-          case 31:
+          case 34:
             gitAddType = _context.sent;
-            _context.next = 34;
+            _context.next = 37;
             return _inquirer["default"].prompt([{
               type: 'rawlist',
               name: 'ignoreCommit',
@@ -206,15 +211,15 @@ var push = /*#__PURE__*/function () {
               "default": '是'
             }]);
 
-          case 34:
+          case 37:
             ignoreCommitType = _context.sent;
 
             if (!(gitAddType.addType === gitAddStr)) {
-              _context.next = 43;
+              _context.next = 46;
               break;
             }
 
-            _context.next = 38;
+            _context.next = 41;
             return _inquirer["default"].prompt([{
               type: 'input',
               name: 'cusCommit',
@@ -222,17 +227,17 @@ var push = /*#__PURE__*/function () {
               "default": 'git add *'
             }]);
 
-          case 38:
+          case 41:
             customCommit = _context.sent;
             // 默认添加 执行添加
             console.log(_chalk["default"].yellowBright('执行命令：'), _chalk["default"].cyanBright(customCommit.cusCommit));
             (0, _index.execSync)(customCommit.cusCommit);
-            _context.next = 57;
+            _context.next = 60;
             break;
 
-          case 43:
+          case 46:
             if (!(gitAddType.addType === gitAuto)) {
-              _context.next = 55;
+              _context.next = 58;
               break;
             }
 
@@ -248,26 +253,26 @@ var push = /*#__PURE__*/function () {
             (0, _index.execSync)('git push origin ' + "".concat(branchName));
             return _context.abrupt("return");
 
-          case 55:
+          case 58:
             // 默认添加 执行添加
             console.log(_chalk["default"].yellowBright('执行命令：'), _chalk["default"].cyanBright(gitAddType.addType));
             (0, _index.execSync)(gitAddType.addType);
 
-          case 57:
+          case 60:
             // 获取commit文案
             console.log(_chalk["default"].yellowBright('执行命令：'), _chalk["default"].cyanBright("git commit -m \"".concat(completeText, "\" ").concat(ignoreCommitType.ignoreCommit === '是' ? '--no-verify' : '')));
             (0, _index.execSync)("git commit -m \"".concat(completeText, "\" ").concat(ignoreCommitType.ignoreCommit === '是' ? '--no-verify' : ''));
 
             if (!(action === 'commit')) {
-              _context.next = 61;
+              _context.next = 64;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 61:
+          case 64:
             gitPushStr = '自定义';
-            _context.next = 64;
+            _context.next = 67;
             return _inquirer["default"].prompt([{
               type: 'rawlist',
               name: 'pushType',
@@ -275,11 +280,11 @@ var push = /*#__PURE__*/function () {
               choices: ["git push origin " + "".concat(branchName), '自定义']
             }]);
 
-          case 64:
+          case 67:
             gitPushType = _context.sent;
 
             if (!(gitPushType.pushType !== gitPushStr)) {
-              _context.next = 73;
+              _context.next = 76;
               break;
             }
 
@@ -290,8 +295,8 @@ var push = /*#__PURE__*/function () {
             (0, _index.execSync)('git push origin feature/3.2.19_SFORM_3678');
             return _context.abrupt("return");
 
-          case 73:
-            _context.next = 75;
+          case 76:
+            _context.next = 78;
             return _inquirer["default"].prompt([{
               type: 'input',
               name: 'cusPush',
@@ -299,14 +304,14 @@ var push = /*#__PURE__*/function () {
               "default": 'git push orign ' + "".concat(branchName)
             }]);
 
-          case 75:
+          case 78:
             _customCommit = _context.sent;
             console.log(_chalk["default"].yellowBright('执行命令：'), _chalk["default"].cyanBright('git pull'));
             (0, _index.execSync)('git pull');
             console.log(_chalk["default"].yellowBright('执行命令：'), _chalk["default"].cyanBright(_customCommit.cusPush));
             (0, _index.execSync)(_customCommit.cusPush);
 
-          case 80:
+          case 83:
           case "end":
             return _context.stop();
         }

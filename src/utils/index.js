@@ -1,7 +1,7 @@
 
 import fs from 'fs';
 import path from 'path'
-import { pathUrl } from './constants'
+import { pathUrl, defaultBoard } from './constants'
 import chalk from 'chalk';
 import childProcess from 'child_process';
 import ora from 'ora'
@@ -56,9 +56,15 @@ export function execSync(cmd, stdio, cwd) {
 
 
 /** 获取本地分支名 */
-export function getHeadBranch() {
+export function getHeadBranch(cwd) {
+    let file = findConfigFile(cwd, './.git/HEAD')
     const baseDir = process.cwd()
-    const head = fs.readFileSync(path.resolve(baseDir, './.git/HEAD'), { encoding: 'utf-8' });
+    let head = null
+    if (file.hasFile) {
+        head = fs.readFileSync(file.url, { encoding: 'utf-8' });
+    } else {
+        head = fs.readFileSync(path.resolve(baseDir, './.git/HEAD'), { encoding: 'utf-8' });
+    }
     let branch = head.split('refs/heads/')[1];
     if (!branch) {
         // exec 速度比较慢
@@ -69,7 +75,7 @@ export function getHeadBranch() {
 }
 
 // 连接jira账号并获取对应的数据 && 写入文件
-export const writeData = async (fileData, designatedBoard) => {
+export const writeData = async (fileData, designatedBoard, localConfig) => {
     spinner.color = 'yellow';
     spinner.start('获取关联的jira账号');
     try {
@@ -77,13 +83,13 @@ export const writeData = async (fileData, designatedBoard) => {
             name: fileData.name,
             password: fileData.password,
             delay: 2000,
-            designatedBoard: designatedBoard || defaultBoard
+            designatedBoard: designatedBoard || localConfig.Board || defaultBoard
         })
         fileData.baseData = data
         // 2小时过期
         fileData.expirationTime = 7200 * 1000
         fileData.startTime = +new Date()
-        fileData.boardType = designatedBoard;
+        fileData.boardType = designatedBoard || localConfig.Board || defaultBoard;
         await createGitFile(fileData)
         spinner.succeed('获取jira账号成功')
         return data
@@ -97,7 +103,7 @@ export const writeData = async (fileData, designatedBoard) => {
 /**
  * 
 */
-export const getJiraData = async (fileData, designatedBoard) => {
+export const getJiraData = async (fileData, designatedBoard, localConfig = {}) => {
     let data = null
     // 存在过期时间
     if (fileData.expirationTime && fileData.startTime) {
@@ -106,7 +112,7 @@ export const getJiraData = async (fileData, designatedBoard) => {
             if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
                 // 重新获取
                 console.log(chalk.greenBright('重新获取jira信息...'))
-                data = await writeData(fileData, designatedBoard)
+                data = await writeData(fileData, designatedBoard, localConfig)
             } else {
                 // 缓存中获取
                 console.log(chalk.greenBright('从缓存中获取jira信息...'))
@@ -114,11 +120,55 @@ export const getJiraData = async (fileData, designatedBoard) => {
             }
         } else { // 需要重新获取
             console.log(chalk.greenBright('看板模块切换，重新获取jira信息...'))
-            data = await writeData(fileData, designatedBoard)
+            data = await writeData(fileData, designatedBoard, localConfig)
         }
     } else {
         console.log(chalk.greenBright('初次获取jira信息...'))
-        data = await writeData(fileData, designatedBoard)
+        data = await writeData(fileData, designatedBoard, localConfig)
     }
     return data
 } 
+
+// 查找指定文件是否存在
+export function findConfigFile (dirname, fileName) {
+    let basePath = '../'
+    let maxLevel = 5
+    let index = 0
+    let d = false
+    let url = ''
+    while(!d && index < maxLevel) {
+        const arr = []
+        for (let i = 0; i < index; i++) {
+            arr.push(basePath)
+        }
+        url = path.resolve(dirname, arr.join(''), fileName)
+        index++
+        d = fs.existsSync(url)
+    }
+    return {
+        hasFile: d,
+        url
+    }
+}
+
+// 获取本地文件
+export async function getLocalConfigFile (dirname, fileName) {
+    let file = findConfigFile(dirname, fileName)
+    if (file.hasFile) {
+        let d = await new Promise((resolve, reject) => {
+            fs.readFile(file.url, 'utf-8', (err, data) => {
+                if (err) {
+                    console.log(chalk.red('初始化文件错误，请重新初始化命令 <mdmCommit init>'))
+                    throw err;
+                }
+                try {
+                    resolve(JSON.parse(data))
+                } catch (error) {
+                    resolve({})
+                }
+            })
+        })
+        return d
+    }
+    return {}
+}

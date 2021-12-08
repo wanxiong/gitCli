@@ -1,18 +1,19 @@
 const ora = require('ora');
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { getGitFile, writeData, getJiraData } from './utils/index'
-import { typeList, scopes } from './utils/constants'
+import { getGitFile, getJiraData, getLocalConfigFile } from './utils/index'
+import { typeList, scopes, configFileName } from './utils/constants'
 import { getSformData } from './push'
 
 const message = async (action, d) => {
     const {designatedBoard, allData} = d
+    const localConfig = await getLocalConfigFile(process.cwd(), configFileName);
     const fileData = await getGitFile()
     let data = {}
     // 存在过期时间
-    data = await getJiraData(fileData, designatedBoard)
+    data = await getJiraData(fileData, designatedBoard, localConfig)
     // 执行交互命令选择获取的内容
-    const sformData = getSformData(data, fileData.name, allData, designatedBoard)
+    const sformData = getSformData(data, fileData.name, allData || localConfig.lookAll, designatedBoard)
     const ownList = sformData.perfect
     if (!ownList.length) {
         console.log(chalk.redBright('看板类型 ' + fileData.boardType + ' 数据为空,请确认账户 ' + fileData.name + ' 是否没有数据'))
@@ -27,7 +28,7 @@ const message = async (action, d) => {
         type: 'rawlist', 
         name: 'preType',
         message: '请选择更改类型（回车确认）',
-        choices: typeList,
+        choices: typeList.concat(localConfig.typeList || []),
         pageSize: 10
     }])
     // 修改涉及到的模块
@@ -35,7 +36,7 @@ const message = async (action, d) => {
         type: 'checkbox', 
         name: 'moduleType',
         message: '请选择模块范围（空格选中、可回车跳过）',
-        choices: scopes,
+        choices: scopes.concat(localConfig.scopes || []),
         pageSize: 20
     }])
     // 本次对应的sform Id

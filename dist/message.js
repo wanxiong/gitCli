@@ -20,26 +20,31 @@ var ora = require('ora');
 
 var message = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(action, d) {
-    var designatedBoard, allData, fileData, data, sformData, ownList, pre, moduleType, formAnswer, commitMessage, moduleStr, completeText;
+    var designatedBoard, allData, localConfig, fileData, data, sformData, ownList, pre, moduleType, formAnswer, commitMessage, moduleStr, completeText;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             designatedBoard = d.designatedBoard, allData = d.allData;
             _context.next = 3;
-            return (0, _index.getGitFile)();
+            return (0, _index.getLocalConfigFile)(process.cwd(), _constants.configFileName);
 
           case 3:
+            localConfig = _context.sent;
+            _context.next = 6;
+            return (0, _index.getGitFile)();
+
+          case 6:
             fileData = _context.sent;
             data = {}; // 存在过期时间
 
-            _context.next = 7;
-            return (0, _index.getJiraData)(fileData, designatedBoard);
+            _context.next = 10;
+            return (0, _index.getJiraData)(fileData, designatedBoard, localConfig);
 
-          case 7:
+          case 10:
             data = _context.sent;
             // 执行交互命令选择获取的内容
-            sformData = (0, _push.getSformData)(data, fileData.name, allData, designatedBoard);
+            sformData = (0, _push.getSformData)(data, fileData.name, allData || localConfig.lookAll, designatedBoard);
             ownList = sformData.perfect;
 
             if (!ownList.length) {
@@ -51,29 +56,29 @@ var message = /*#__PURE__*/function () {
               name: "\u8DF3\u8FC7"
             }); // 本次提交属于新增还是啥
 
-            _context.next = 14;
+            _context.next = 17;
             return _inquirer["default"].prompt([{
               type: 'rawlist',
               name: 'preType',
               message: '请选择更改类型（回车确认）',
-              choices: _constants.typeList,
+              choices: _constants.typeList.concat(localConfig.typeList || []),
               pageSize: 10
             }]);
 
-          case 14:
+          case 17:
             pre = _context.sent;
-            _context.next = 17;
+            _context.next = 20;
             return _inquirer["default"].prompt([{
               type: 'checkbox',
               name: 'moduleType',
               message: '请选择模块范围（空格选中、可回车跳过）',
-              choices: _constants.scopes,
+              choices: _constants.scopes.concat(localConfig.scopes || []),
               pageSize: 20
             }]);
 
-          case 17:
+          case 20:
             moduleType = _context.sent;
-            _context.next = 20;
+            _context.next = 23;
             return _inquirer["default"].prompt([{
               type: 'checkbox',
               name: 'sformType',
@@ -91,23 +96,23 @@ var message = /*#__PURE__*/function () {
               }
             }]);
 
-          case 20:
+          case 23:
             formAnswer = _context.sent;
-            _context.next = 23;
+            _context.next = 26;
             return _inquirer["default"].prompt([{
               type: 'input',
               name: 'commitText',
               message: '请输入提交的备注信息'
             }]);
 
-          case 23:
+          case 26:
             commitMessage = _context.sent;
             // release(mdm-antd, mdm-creator): sform-4118 xxxxx
             moduleStr = moduleType.moduleType.toString();
             completeText = "".concat(pre.preType).concat(moduleStr ? "(".concat(moduleStr, ")") : '', ": ").concat(formAnswer.sformType.includes('skip') ? '' : formAnswer.sformType, " ").concat(commitMessage.commitText);
             console.log(_chalk["default"].yellowBright('\n请拷贝(最终提交文案)：'), _chalk["default"].greenBright(completeText + '\n'));
 
-          case 27:
+          case 30:
           case "end":
             return _context.stop();
         }

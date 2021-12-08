@@ -3,13 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.typeList = exports.scopes = exports.pathUrl = exports.defaultBoard = exports.VERSION = void 0;
-var VERSION = "1.2.5";
+exports.typeList = exports.scopes = exports.pathUrl = exports.defaultBoard = exports.configFileName = exports.VERSION = void 0;
+var VERSION = "1.2.6";
 exports.VERSION = VERSION;
 var pathUrl = 'baseConfig.json';
 exports.pathUrl = pathUrl;
 var defaultBoard = 'SFORM Sprint';
 exports.defaultBoard = defaultBoard;
+var configFileName = 'mdm-git.config.json';
+exports.configFileName = configFileName;
 var typeList = [{
   value: 'feat',
   name: 'feat: 增加新功能（feature）'

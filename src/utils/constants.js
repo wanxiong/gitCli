@@ -1,6 +1,7 @@
-export const VERSION = "1.2.5"
+export const VERSION = "1.2.6"
 export const pathUrl = 'baseConfig.json'
 export const defaultBoard = 'SFORM Sprint'
+export const configFileName = 'mdm-git.config.json'
 export const typeList = [
     {
         value: 'feat',

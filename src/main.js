@@ -1,5 +1,5 @@
 import program from 'commander'
-import { VERSION, defaultBoard } from './utils/constants'
+import { VERSION } from './utils/constants'
 import apply from './index'
 
 let actionMap = {
@@ -29,7 +29,7 @@ let actionMap = {
             'mdmGit push -a',
         ],
         option: [
-            ['-d, --designated-board [--designated-doard]', '指定看板的模块', defaultBoard],
+            ['-d, --designated-board [--designated-doard]', '指定看板的模块', ''],
             ['-a, --all-data', '看到所有数据', false]
         ]
     },
@@ -42,7 +42,7 @@ let actionMap = {
             'mdmGit commit -a',
         ],
         option: [
-            ['-d, --designated-board [--designated-doard]', '指定看板的模块', defaultBoard],
+            ['-d, --designated-board [--designated-doard]', '指定看板的模块', ''],
             ['-a, --all-data', '看到所有数据', false]
         ]
     },
@@ -55,7 +55,7 @@ let actionMap = {
             'mdmGit message -a',
         ],
         option: [
-            ['-d, --designated-board [--designated-doard]', '指定看板的模块', defaultBoard],
+            ['-d, --designated-board [--designated-doard]', '指定看板的模块', ''],
             ['-a, --all-data', '看到所有数据', false]
         ]
     },

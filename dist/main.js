@@ -31,7 +31,7 @@ var actionMap = {
     description: '提交并推送代码',
     // 描述
     usages: ['mdmGit push', 'mdmGit push -d [options]', 'mdmGit push -a'],
-    option: [['-d, --designated-board [--designated-doard]', '指定看板的模块', _constants.defaultBoard], ['-a, --all-data', '看到所有数据', false]]
+    option: [['-d, --designated-board [--designated-doard]', '指定看板的模块', ''], ['-a, --all-data', '看到所有数据', false]]
   },
   commit: {
     alias: 'C',
@@ -39,7 +39,7 @@ var actionMap = {
     description: '提交代码',
     // 描述
     usages: ['mdmGit commit', 'mdmGit commit -d [options]', 'mdmGit commit -a'],
-    option: [['-d, --designated-board [--designated-doard]', '指定看板的模块', _constants.defaultBoard], ['-a, --all-data', '看到所有数据', false]]
+    option: [['-d, --designated-board [--designated-doard]', '指定看板的模块', ''], ['-a, --all-data', '看到所有数据', false]]
   },
   message: {
     alias: 'M',
@@ -47,7 +47,7 @@ var actionMap = {
     description: '获取提交commit信息',
     // 描述
     usages: ['mdmGit message', 'mdmGit message -d [options]', 'mdmGit message -a'],
-    option: [['-d, --designated-board [--designated-doard]', '指定看板的模块', _constants.defaultBoard], ['-a, --all-data', '看到所有数据', false]]
+    option: [['-d, --designated-board [--designated-doard]', '指定看板的模块', ''], ['-a, --all-data', '看到所有数据', false]]
   }
 }; // 添加 init / config 命令
 
