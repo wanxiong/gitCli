@@ -15,24 +15,66 @@ var _puppeteer = _interopRequireDefault(require("puppeteer"));
 
 var _path = _interopRequireDefault(require("path"));
 
-// const puppeteer = require('puppeteer');
-// const puppeteer = require('puppeteer');
+var _constants = require("./constants");
+
 var getListUrl = 'http://jira.taimei.com/rest/greenhopper/1.0/xboard/work/allData.json';
+var questionUrl = 'http://jira.taimei.com/rest/issueNav/1/issueTable';
+
+function toQuestionPage(_x) {
+  return _toQuestionPage.apply(this, arguments);
+}
+
+function _toQuestionPage() {
+  _toQuestionPage = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(page) {
+    var questionBtn, linkToBtn;
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.next = 2;
+            return page.$('#find_link');
+
+          case 2:
+            questionBtn = _context5.sent;
+            _context5.next = 5;
+            return questionBtn.click();
+
+          case 5:
+            _context5.next = 7;
+            return page.waitForTimeout(1000);
+
+          case 7:
+            _context5.next = 9;
+            return page.$('#filter_lnk_my_lnk');
+
+          case 9:
+            linkToBtn = _context5.sent;
+            linkToBtn.click();
+
+          case 11:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+  return _toQuestionPage.apply(this, arguments);
+}
 
 var initAccount = /*#__PURE__*/function () {
-  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(account) {
-    return _regenerator["default"].wrap(function _callee2$(_context2) {
+  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(account) {
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            return _context2.abrupt("return", new Promise( /*#__PURE__*/function () {
-              var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(resolve, reject) {
-                var browser, page, loginInput, loginPassword, loginSubmitBtn, boardBtn, boardList, linkList, i, data, hasBoard, reg, mat, str, params, respone, jsonData;
-                return _regenerator["default"].wrap(function _callee$(_context) {
+            return _context4.abrupt("return", new Promise( /*#__PURE__*/function () {
+              var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(resolve, reject) {
+                var browser, questionData, page, loginInput, loginPassword, loginSubmitBtn, boardBtn, boardList, linkList, i, data, hasBoard, reg, mat, str, params, respone, jsonData;
+                return _regenerator["default"].wrap(function _callee3$(_context3) {
                   while (1) {
-                    switch (_context.prev = _context.next) {
+                    switch (_context3.prev = _context3.next) {
                       case 0:
-                        _context.next = 2;
+                        _context3.next = 2;
                         return _puppeteer["default"].launch({
                           headless: true,
                           defaultViewport: {
@@ -42,82 +84,164 @@ var initAccount = /*#__PURE__*/function () {
                         });
 
                       case 2:
-                        browser = _context.sent;
-                        _context.prev = 3;
-                        _context.next = 6;
+                        browser = _context3.sent;
+                        _context3.prev = 3;
+                        questionData = {}; // 新建界面
+
+                        _context3.next = 7;
                         return browser.newPage();
 
-                      case 6:
-                        page = _context.sent;
-                        _context.next = 9;
+                      case 7:
+                        page = _context3.sent;
+                        _context3.next = 10;
+                        return page.setRequestInterception(true);
+
+                      case 10:
+                        page.on('request', /*#__PURE__*/function () {
+                          var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req) {
+                            return _regenerator["default"].wrap(function _callee$(_context) {
+                              while (1) {
+                                switch (_context.prev = _context.next) {
+                                  case 0:
+                                    req["continue"]({});
+
+                                  case 1:
+                                  case "end":
+                                    return _context.stop();
+                                }
+                              }
+                            }, _callee);
+                          }));
+
+                          return function (_x5) {
+                            return _ref3.apply(this, arguments);
+                          };
+                        }());
+                        page.on('response', /*#__PURE__*/function () {
+                          var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(res) {
+                            return _regenerator["default"].wrap(function _callee2$(_context2) {
+                              while (1) {
+                                switch (_context2.prev = _context2.next) {
+                                  case 0:
+                                    if (!(res.url().indexOf(questionUrl) !== -1)) {
+                                      _context2.next = 8;
+                                      break;
+                                    }
+
+                                    console.log('哈哈哈');
+                                    _context2.next = 4;
+                                    return res.json();
+
+                                  case 4:
+                                    questionData = _context2.sent;
+                                    _context2.next = 7;
+                                    return browser.close();
+
+                                  case 7:
+                                    resolve(questionData);
+
+                                  case 8:
+                                    return _context2.abrupt("return", res);
+
+                                  case 9:
+                                  case "end":
+                                    return _context2.stop();
+                                }
+                              }
+                            }, _callee2);
+                          }));
+
+                          return function (_x6) {
+                            return _ref4.apply(this, arguments);
+                          };
+                        }()); // 跳转界面
+
+                        _context3.next = 14;
                         return page["goto"]('http://jira.taimei.com/login.jsp');
 
-                      case 9:
-                        _context.next = 11;
+                      case 14:
+                        _context3.next = 16;
                         return page.$('#login-form-username');
 
-                      case 11:
-                        loginInput = _context.sent;
-                        _context.next = 14;
+                      case 16:
+                        loginInput = _context3.sent;
+                        _context3.next = 19;
                         return page.$('#login-form-password');
 
-                      case 14:
-                        loginPassword = _context.sent;
-                        _context.next = 17;
+                      case 19:
+                        loginPassword = _context3.sent;
+                        _context3.next = 22;
                         return page.$('#login-form-submit');
 
-                      case 17:
-                        loginSubmitBtn = _context.sent;
+                      case 22:
+                        loginSubmitBtn = _context3.sent;
                         // 获取焦点  填充内容
                         loginInput.focus();
-                        _context.next = 21;
+                        _context3.next = 26;
                         return page.keyboard.type(account.name);
 
-                      case 21:
+                      case 26:
                         loginPassword.focus();
-                        _context.next = 24;
+                        _context3.next = 29;
                         return page.keyboard.type(account.password);
 
-                      case 24:
-                        _context.next = 26;
+                      case 29:
+                        _context3.next = 31;
                         return loginSubmitBtn.click();
 
-                      case 26:
-                        _context.next = 28;
+                      case 31:
+                        _context3.next = 33;
                         return page.waitForTimeout(account.delay);
 
-                      case 28:
-                        _context.next = 30;
+                      case 33:
+                        _context3.next = 35;
                         return page.$('#greenhopper_menu');
 
-                      case 30:
-                        boardBtn = _context.sent;
-                        _context.next = 33;
+                      case 35:
+                        boardBtn = _context3.sent;
+                        _context3.next = 38;
                         return page.screenshot({
                           path: _path["default"].resolve(__dirname, '../account.png')
                         });
 
-                      case 33:
-                        _context.next = 35;
-                        return boardBtn.click();
-
-                      case 35:
-                        // 获取下拉数据
-                        boardList = [];
-                        _context.next = 38;
-                        return page.$$('#greenhopper_menu_dropdown_recent .aui-list-truncate li');
-
                       case 38:
-                        linkList = _context.sent;
-                        i = 0;
-
-                      case 40:
-                        if (!(i < linkList.length)) {
-                          _context.next = 48;
+                        if (!(account.designatedBoard.trim().toLocaleLowerCase() === _constants.BoardBug)) {
+                          _context3.next = 42;
                           break;
                         }
 
-                        _context.next = 43;
+                        _context3.next = 41;
+                        return toQuestionPage(page);
+
+                      case 41:
+                        return _context3.abrupt("return");
+
+                      case 42:
+                        _context3.next = 44;
+                        return boardBtn.click();
+
+                      case 44:
+                        // 获取面板下拉数据   ----- 面板
+                        boardList = []; // 等待2秒 跳转需要时间
+
+                        _context3.next = 47;
+                        return page.waitForTimeout(1000);
+
+                      case 47:
+                        _context3.next = 49;
+                        return page.$$('#greenhopper_menu_dropdown_recent .aui-list-truncate li');
+
+                      case 49:
+                        linkList = _context3.sent;
+                        i = 0;
+
+                      case 51:
+                        if (!(i < linkList.length)) {
+                          _context3.next = 59;
+                          break;
+                        }
+
+                        _context3.next = 54;
                         return linkList[i].$eval('a', function (el) {
                           var href = el.getAttribute('href'); // 获取所有的信息
 
@@ -129,16 +253,17 @@ var initAccount = /*#__PURE__*/function () {
                           };
                         });
 
-                      case 43:
-                        data = _context.sent;
+                      case 54:
+                        data = _context3.sent;
                         boardList.push(data);
 
-                      case 45:
+                      case 56:
                         i++;
-                        _context.next = 40;
+                        _context3.next = 51;
                         break;
 
-                      case 48:
+                      case 59:
+                        console.log('boardList', boardList, linkList);
                         hasBoard = boardList.filter(function (item) {
                           var text = item.innerHTML;
 
@@ -148,7 +273,7 @@ var initAccount = /*#__PURE__*/function () {
                         });
 
                         if (!hasBoard.length) {
-                          _context.next = 65;
+                          _context3.next = 77;
                           break;
                         }
 
@@ -156,62 +281,62 @@ var initAccount = /*#__PURE__*/function () {
                         mat = reg.exec(hasBoard[0].originHref);
                         str = mat ? mat[1] : '';
                         params = '?rapidViewId=' + str;
-                        _context.next = 56;
+                        _context3.next = 68;
                         return page["goto"](getListUrl + params);
 
-                      case 56:
-                        respone = _context.sent;
-                        _context.next = 59;
+                      case 68:
+                        respone = _context3.sent;
+                        _context3.next = 71;
                         return respone.json();
 
-                      case 59:
-                        jsonData = _context.sent;
-                        _context.next = 62;
+                      case 71:
+                        jsonData = _context3.sent;
+                        _context3.next = 74;
                         return browser.close();
 
-                      case 62:
+                      case 74:
                         resolve(jsonData);
-                        _context.next = 66;
+                        _context3.next = 78;
                         break;
 
-                      case 65:
+                      case 77:
                         throw new Error('你没有相关的看板内容====' + account.designatedBoard.trim() + ',请重新选择看板');
 
-                      case 66:
-                        _context.next = 73;
+                      case 78:
+                        _context3.next = 85;
                         break;
 
-                      case 68:
-                        _context.prev = 68;
-                        _context.t0 = _context["catch"](3);
-                        _context.next = 72;
+                      case 80:
+                        _context3.prev = 80;
+                        _context3.t0 = _context3["catch"](3);
+                        _context3.next = 84;
                         return browser.close();
 
-                      case 72:
-                        reject(_context.t0);
+                      case 84:
+                        reject(_context3.t0);
 
-                      case 73:
+                      case 85:
                       case "end":
-                        return _context.stop();
+                        return _context3.stop();
                     }
                   }
-                }, _callee, null, [[3, 68]]);
+                }, _callee3, null, [[3, 80]]);
               }));
 
-              return function (_x2, _x3) {
+              return function (_x3, _x4) {
                 return _ref2.apply(this, arguments);
               };
             }()));
 
           case 1:
           case "end":
-            return _context2.stop();
+            return _context4.stop();
         }
       }
-    }, _callee2);
+    }, _callee4);
   }));
 
-  return function initAccount(_x) {
+  return function initAccount(_x2) {
     return _ref.apply(this, arguments);
   };
 }();

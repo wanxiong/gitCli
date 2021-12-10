@@ -28,23 +28,41 @@ var getSformData = function getSformData(data, name, isAll, otherBoard) {
   var otherList = [];
   var perfect = [];
 
+  if (otherBoard === _constants.BoardBug && data && data.issueTable && data.issueTable.table) {
+    var arr = data.issueTable.table.slice(0, 50);
+    arr.forEach(function (item) {
+      var str = "".concat(item.key, " \u6765\u81EA\uFF08").concat(item.type.name, "\uFF09 ").concat(item.summary.slice(0, 40));
+      perfect.push({
+        value: item.key,
+        name: str
+      });
+    });
+    return {
+      parentObj: parentObj,
+      childrenAllList: list,
+      myselfparentObj: myselfparentObj,
+      otherList: otherList,
+      perfect: perfect
+    };
+  }
+
   if (data.issuesData && data.issuesData.issues) {
-    var arr = data.issuesData.issues.slice(0, 50);
+    var _arr = data.issuesData.issues.slice(0, 50);
 
-    for (var i = 0; i < arr.length; i++) {
-      if (!arr[i].parentId) {
+    for (var i = 0; i < _arr.length; i++) {
+      if (!_arr[i].parentId) {
         // 顶级
-        parentObj[arr[i].id] = arr[i];
+        parentObj[_arr[i].id] = _arr[i];
 
-        if (name === arr[i].assignee) {
-          myselfparentObj[arr[i].id] = arr[i];
+        if (name === _arr[i].assignee) {
+          myselfparentObj[_arr[i].id] = _arr[i];
         }
       } else {
-        if (name === arr[i].assignee) {
-          otherList.push(arr[i]);
+        if (name === _arr[i].assignee) {
+          otherList.push(_arr[i]);
         }
 
-        list.push(arr[i]);
+        list.push(_arr[i]);
       }
     }
 
@@ -77,7 +95,7 @@ var getSformData = function getSformData(data, name, isAll, otherBoard) {
       });
     });
   } else {
-    throw new Error(_chalk["default"].bgRed('当前看板' + otherBoard + '的数据不存在'));
+    throw new Error(_chalk["default"].bgRed('当前查看的数据 ' + otherBoard + ' 的数据不存在'));
   }
 
   return {

@@ -2,7 +2,7 @@ const ora = require('ora');
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { execSync, getGitFile, getHeadBranch, getJiraData, getLocalConfigFile } from './utils/index'
-import { typeList, scopes, configFileName } from './utils/constants'
+import { typeList, scopes, configFileName, BoardBug } from './utils/constants'
 
 export const getSformData = (data, name, isAll, otherBoard) => {
     let parentObj = {}
@@ -10,6 +10,23 @@ export const getSformData = (data, name, isAll, otherBoard) => {
     let myselfparentObj = {}
     let otherList = []
     let perfect = []
+    if (otherBoard === BoardBug && data && data.issueTable && data.issueTable.table) {
+        let arr = data.issueTable.table.slice(0, 50);
+        arr.forEach((item) => {
+            let str = `${item.key} 来自（${item.type.name}） ${item.summary.slice(0, 40)}`
+            perfect.push({
+                value: item.key,
+                name: str
+            })
+        })
+        return {
+            parentObj,
+            childrenAllList: list,
+            myselfparentObj,
+            otherList,
+            perfect
+        }
+    }
 
     if (data.issuesData && data.issuesData.issues) {
         let arr = data.issuesData.issues.slice(0, 50);
@@ -60,7 +77,7 @@ export const getSformData = (data, name, isAll, otherBoard) => {
         
 
     } else {
-        throw new Error(chalk.bgRed('当前看板' + otherBoard +'的数据不存在'))
+        throw new Error(chalk.bgRed('当前查看的数据 ' + otherBoard +' 的数据不存在'))
     }
 
 

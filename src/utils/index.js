@@ -1,7 +1,7 @@
 
 import fs from 'fs';
 import path from 'path'
-import { pathUrl, defaultBoard } from './constants'
+import { pathUrl, defaultBoard, BoardBug } from './constants'
 import chalk from 'chalk';
 import childProcess from 'child_process';
 import ora from 'ora'
@@ -79,17 +79,22 @@ export const writeData = async (fileData, designatedBoard, localConfig) => {
     spinner.color = 'yellow';
     spinner.start('获取关联的jira账号');
     try {
+        let type = designatedBoard || localConfig.Board || defaultBoard
         const data = await initAccount({
             name: fileData.name,
             password: fileData.password,
             delay: 2000,
-            designatedBoard: designatedBoard || localConfig.Board || defaultBoard
+            designatedBoard: type
         })
-        fileData.baseData = data
+        if (type == BoardBug) {
+            fileData.bugData = data
+        } else {
+            fileData.baseData = data
+        }
         // 2小时过期
         fileData.expirationTime = 7200 * 1000
         fileData.startTime = +new Date()
-        fileData.boardType = designatedBoard || localConfig.Board || defaultBoard;
+        fileData.boardType = type;
         await createGitFile(fileData)
         spinner.succeed('获取jira账号成功')
         return data
@@ -106,6 +111,7 @@ export const writeData = async (fileData, designatedBoard, localConfig) => {
 export const getJiraData = async (fileData, designatedBoard, localConfig = {}) => {
     let data = null
     // 存在过期时间
+    console.log(designatedBoard, fileData.boardType)
     if (fileData.expirationTime && fileData.startTime) {
         if (designatedBoard === fileData.boardType) { // 看板类型相同 直接读取输
             const nowData = +new Date()
@@ -116,7 +122,11 @@ export const getJiraData = async (fileData, designatedBoard, localConfig = {}) =
             } else {
                 // 缓存中获取
                 console.log(chalk.greenBright('从缓存中获取jira信息...'))
-                data = fileData.baseData
+                if (designatedBoard === BoardBug) {
+                    data = JSON.parse(fileData.bugData)
+                } else {
+                    data = JSON.parse(fileData.baseData)
+                }
             }
         } else { // 需要重新获取
             console.log(chalk.greenBright('看板模块切换，重新获取jira信息...'))
