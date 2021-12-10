@@ -28,6 +28,10 @@ mdmGit push
 mdmGit push -d [option]
 // 案例指定看板
 mdmGit push -d 'SFORM Sprint'
+
+// 查看bug或所有任务
+mdmGit push -d 'bug'
+
 ```
 
 - 推送并提交代码，jira账号对应看板是否可以看到所有人的任务（默认：false）

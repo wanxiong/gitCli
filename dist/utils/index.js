@@ -261,9 +261,9 @@ var getJiraData = /*#__PURE__*/function () {
             console.log(_chalk["default"].greenBright('从缓存中获取jira信息...'));
 
             if (designatedBoard === _constants.BoardBug) {
-              data = JSON.parse(fileData.bugData);
+              data = fileData.bugData;
             } else {
-              data = JSON.parse(fileData.baseData);
+              data = fileData.baseData;
             }
 
           case 15:

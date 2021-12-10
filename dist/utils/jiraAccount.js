@@ -124,26 +124,25 @@ var initAccount = /*#__PURE__*/function () {
                                 switch (_context2.prev = _context2.next) {
                                   case 0:
                                     if (!(res.url().indexOf(questionUrl) !== -1)) {
-                                      _context2.next = 8;
+                                      _context2.next = 7;
                                       break;
                                     }
 
-                                    console.log('哈哈哈');
-                                    _context2.next = 4;
+                                    _context2.next = 3;
                                     return res.json();
 
-                                  case 4:
+                                  case 3:
                                     questionData = _context2.sent;
-                                    _context2.next = 7;
+                                    _context2.next = 6;
                                     return browser.close();
 
-                                  case 7:
+                                  case 6:
                                     resolve(questionData);
 
-                                  case 8:
+                                  case 7:
                                     return _context2.abrupt("return", res);
 
-                                  case 9:
+                                  case 8:
                                   case "end":
                                     return _context2.stop();
                                 }
@@ -263,7 +262,6 @@ var initAccount = /*#__PURE__*/function () {
                         break;
 
                       case 59:
-                        console.log('boardList', boardList, linkList);
                         hasBoard = boardList.filter(function (item) {
                           var text = item.innerHTML;
 
@@ -273,7 +271,7 @@ var initAccount = /*#__PURE__*/function () {
                         });
 
                         if (!hasBoard.length) {
-                          _context3.next = 77;
+                          _context3.next = 76;
                           break;
                         }
 
@@ -281,46 +279,46 @@ var initAccount = /*#__PURE__*/function () {
                         mat = reg.exec(hasBoard[0].originHref);
                         str = mat ? mat[1] : '';
                         params = '?rapidViewId=' + str;
-                        _context3.next = 68;
+                        _context3.next = 67;
                         return page["goto"](getListUrl + params);
 
-                      case 68:
+                      case 67:
                         respone = _context3.sent;
-                        _context3.next = 71;
+                        _context3.next = 70;
                         return respone.json();
 
-                      case 71:
+                      case 70:
                         jsonData = _context3.sent;
-                        _context3.next = 74;
+                        _context3.next = 73;
                         return browser.close();
 
-                      case 74:
+                      case 73:
                         resolve(jsonData);
-                        _context3.next = 78;
+                        _context3.next = 77;
                         break;
 
-                      case 77:
+                      case 76:
                         throw new Error('你没有相关的看板内容====' + account.designatedBoard.trim() + ',请重新选择看板');
 
-                      case 78:
-                        _context3.next = 85;
+                      case 77:
+                        _context3.next = 84;
                         break;
 
-                      case 80:
-                        _context3.prev = 80;
+                      case 79:
+                        _context3.prev = 79;
                         _context3.t0 = _context3["catch"](3);
-                        _context3.next = 84;
+                        _context3.next = 83;
                         return browser.close();
 
-                      case 84:
+                      case 83:
                         reject(_context3.t0);
 
-                      case 85:
+                      case 84:
                       case "end":
                         return _context3.stop();
                     }
                   }
-                }, _callee3, null, [[3, 80]]);
+                }, _callee3, null, [[3, 79]]);
               }));
 
               return function (_x3, _x4) {

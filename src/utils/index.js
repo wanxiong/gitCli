@@ -123,9 +123,9 @@ export const getJiraData = async (fileData, designatedBoard, localConfig = {}) =
                 // 缓存中获取
                 console.log(chalk.greenBright('从缓存中获取jira信息...'))
                 if (designatedBoard === BoardBug) {
-                    data = JSON.parse(fileData.bugData)
+                    data = fileData.bugData
                 } else {
-                    data = JSON.parse(fileData.baseData)
+                    data = fileData.baseData
                 }
             }
         } else { // 需要重新获取

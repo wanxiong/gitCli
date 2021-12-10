@@ -38,7 +38,6 @@ export const initAccount = async function (account) {
             })
             page.on('response', async res => {
                 if (res.url().indexOf(questionUrl) !== -1) {
-                    console.log('哈哈哈')
                     questionData = await res.json()
                     await browser.close();
                     resolve(questionData)
@@ -90,7 +89,6 @@ export const initAccount = async function (account) {
                 })
                 boardList.push(data)
             }
-            console.log('boardList', boardList, linkList)
             const hasBoard = boardList.filter((item) => {
                 const text = item.innerHTML;
                 if (text.trim() === account.designatedBoard.trim()) {
