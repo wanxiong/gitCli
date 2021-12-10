@@ -3648,6 +3648,75 @@
 		"cardColorStrategy": "issuetype"
 	},
 	"expirationTime": 7200000,
-	"startTime": 1639116673173,
-	"boardType": "SFORM Sprint"
+	"startTime": 1639116707234,
+	"boardType": "bug",
+	"bugData": {
+		"issueTable": {
+			"columnSortJql": {
+				"summary": "key in ((237474, 237475, 234384)) ORDER BY summary ASC",
+				"issuetype": "key in ((237474, 237475, 234384)) ORDER BY issuetype DESC",
+				"issuekey": "key in ((237474, 237475, 234384)) ORDER BY key ASC",
+				"created": "key in ((237474, 237475, 234384)) ORDER BY created DESC",
+				"assignee": "key in ((237474, 237475, 234384)) ORDER BY assignee ASC",
+				"customfield_12600": "key in ((237474, 237475, 234384)) ORDER BY cf[12600] ASC",
+				"status": "key in ((237474, 237475, 234384)) ORDER BY status DESC"
+			},
+			"description": "",
+			"displayed": 3,
+			"end": 3,
+			"jiraHasIssues": true,
+			"page": 0,
+			"pageSize": 3,
+			"startIndex": 0,
+			"table": [
+				{
+					"id": 237474,
+					"key": "SFORM-4244",
+					"status": "正在做",
+					"summary": "列表和搜索替换",
+					"type": {
+						"description": "The sub-task of the issue",
+						"name": "Sub-task",
+						"iconUrl": "/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype"
+					}
+				},
+				{
+					"id": 237475,
+					"key": "SFORM-4245",
+					"status": "正在做",
+					"summary": "自定义动作替换",
+					"type": {
+						"description": "The sub-task of the issue",
+						"name": "Sub-task",
+						"iconUrl": "/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype"
+					}
+				},
+				{
+					"id": 234384,
+					"key": "SFORM-4119",
+					"status": "OPEN",
+					"summary": "ethunder触发规则-数字框不能输入精度",
+					"type": {
+						"description": "测试过程，维护过程发现影响系统运行的缺陷",
+						"name": "缺陷",
+						"iconUrl": "/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype"
+					}
+				}
+			],
+			"title": "",
+			"total": 3,
+			"url": "",
+			"columns": [
+				"issuetype",
+				"issuekey",
+				"summary",
+				"status",
+				"assignee",
+				"created",
+				"customfield_12600"
+			],
+			"columnConfig": "USER"
+		},
+		"warnings": []
+	}
 }
