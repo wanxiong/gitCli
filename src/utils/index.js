@@ -83,7 +83,7 @@ export const writeData = async (fileData, designatedBoard, localConfig) => {
         const data = await initAccount({
             name: fileData.name,
             password: fileData.password,
-            delay: 2000,
+            delay: 3500,
             designatedBoard: type
         })
         if (type == BoardBug) {
@@ -111,9 +111,8 @@ export const writeData = async (fileData, designatedBoard, localConfig) => {
 export const getJiraData = async (fileData, designatedBoard, localConfig = {}) => {
     let data = null
     // 存在过期时间
-    console.log(designatedBoard, fileData.boardType)
     if (fileData.expirationTime && fileData.startTime) {
-        if (designatedBoard === fileData.boardType) { // 看板类型相同 直接读取输
+        if (designatedBoard === fileData.boardType || (fileData.boardType === defaultBoard && !designatedBoard && fileData.baseData)) { // 看板类型相同 直接读取输
             const nowData = +new Date()
             if(nowData - Number(fileData.startTime) > Number(fileData.expirationTime)) {
                 // 重新获取

@@ -164,7 +164,7 @@ var writeData = /*#__PURE__*/function () {
             return (0, _jiraAccount.initAccount)({
               name: fileData.name,
               password: fileData.password,
-              delay: 2000,
+              delay: 3500,
               designatedBoard: type
             });
 
@@ -226,15 +226,13 @@ var getJiraData = /*#__PURE__*/function () {
             localConfig = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : {};
             data = null; // 存在过期时间
 
-            console.log(designatedBoard, fileData.boardType);
-
             if (!(fileData.expirationTime && fileData.startTime)) {
-              _context2.next = 23;
+              _context2.next = 22;
               break;
             }
 
-            if (!(designatedBoard === fileData.boardType)) {
-              _context2.next = 17;
+            if (!(designatedBoard === fileData.boardType || fileData.boardType === _constants.defaultBoard && !designatedBoard && fileData.baseData)) {
+              _context2.next = 16;
               break;
             }
 
@@ -242,21 +240,21 @@ var getJiraData = /*#__PURE__*/function () {
             nowData = +new Date();
 
             if (!(nowData - Number(fileData.startTime) > Number(fileData.expirationTime))) {
-              _context2.next = 13;
+              _context2.next = 12;
               break;
             }
 
             // 重新获取
             console.log(_chalk["default"].greenBright('重新获取jira信息...'));
-            _context2.next = 10;
+            _context2.next = 9;
             return writeData(fileData, designatedBoard, localConfig);
 
-          case 10:
+          case 9:
             data = _context2.sent;
-            _context2.next = 15;
+            _context2.next = 14;
             break;
 
-          case 13:
+          case 12:
             // 缓存中获取
             console.log(_chalk["default"].greenBright('从缓存中获取jira信息...'));
 
@@ -266,35 +264,35 @@ var getJiraData = /*#__PURE__*/function () {
               data = fileData.baseData;
             }
 
-          case 15:
-            _context2.next = 21;
+          case 14:
+            _context2.next = 20;
             break;
 
-          case 17:
+          case 16:
             // 需要重新获取
             console.log(_chalk["default"].greenBright('看板模块切换，重新获取jira信息...'));
-            _context2.next = 20;
+            _context2.next = 19;
             return writeData(fileData, designatedBoard, localConfig);
+
+          case 19:
+            data = _context2.sent;
 
           case 20:
-            data = _context2.sent;
-
-          case 21:
-            _context2.next = 27;
+            _context2.next = 26;
             break;
 
-          case 23:
+          case 22:
             console.log(_chalk["default"].greenBright('初次获取jira信息...'));
-            _context2.next = 26;
+            _context2.next = 25;
             return writeData(fileData, designatedBoard, localConfig);
 
-          case 26:
+          case 25:
             data = _context2.sent;
 
-          case 27:
+          case 26:
             return _context2.abrupt("return", data);
 
-          case 28:
+          case 27:
           case "end":
             return _context2.stop();
         }

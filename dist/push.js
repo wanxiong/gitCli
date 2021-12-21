@@ -47,7 +47,7 @@ var getSformData = function getSformData(data, name, isAll, otherBoard) {
   }
 
   if (data.issuesData && data.issuesData.issues) {
-    var _arr = data.issuesData.issues.slice(0, 50);
+    var _arr = data.issuesData.issues.slice(0, 200);
 
     for (var i = 0; i < _arr.length; i++) {
       if (!_arr[i].parentId) {

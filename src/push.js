@@ -29,7 +29,7 @@ export const getSformData = (data, name, isAll, otherBoard) => {
     }
 
     if (data.issuesData && data.issuesData.issues) {
-        let arr = data.issuesData.issues.slice(0, 50);
+        let arr = data.issuesData.issues.slice(0, 200);
         for (var i = 0; i < arr.length; i++) {
             if (!arr[i].parentId) {
                 // 顶级
@@ -44,12 +44,11 @@ export const getSformData = (data, name, isAll, otherBoard) => {
                 list.push(arr[i])
             }
         }
-
+       
         if(isAll) {
             otherList = list;
             myselfparentObj = parentObj
         }
-
         // 子任务存在别人的父任务当中
         otherList.forEach((item) => {
             const parentId = item.parentId;
@@ -58,7 +57,6 @@ export const getSformData = (data, name, isAll, otherBoard) => {
                 myselfparentObj[parentObj[parentId].id] = parentObj[parentId]
             }
         })
-
         Object.values(myselfparentObj).forEach(item => {
             let str =  `${item.key}-${item.assigneeName}（父任务）${item.summary.slice(0, 40)}`
             perfect.push({

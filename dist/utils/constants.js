@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.typeList = exports.scopes = exports.pathUrl = exports.defaultBoard = exports.configFileName = exports.VERSION = exports.BoardBug = void 0;
-var VERSION = "1.2.6";
+var VERSION = "1.3.0";
 exports.VERSION = VERSION;
 var pathUrl = 'baseConfig.json';
 exports.pathUrl = pathUrl;
