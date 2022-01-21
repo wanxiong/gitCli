@@ -13,53 +13,9 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _puppeteer = _interopRequireDefault(require("puppeteer"));
 
-var _path = _interopRequireDefault(require("path"));
+var _watchRespose = _interopRequireDefault(require("./watchRespose"));
 
-var _constants = require("./constants");
-
-var getListUrl = 'http://jira.taimei.com/rest/greenhopper/1.0/xboard/work/allData.json';
 var questionUrl = 'http://jira.taimei.com/rest/issueNav/1/issueTable';
-
-function toQuestionPage(_x) {
-  return _toQuestionPage.apply(this, arguments);
-}
-
-function _toQuestionPage() {
-  _toQuestionPage = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(page) {
-    var questionBtn, linkToBtn;
-    return _regenerator["default"].wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            _context5.next = 2;
-            return page.$('#find_link');
-
-          case 2:
-            questionBtn = _context5.sent;
-            _context5.next = 5;
-            return questionBtn.click();
-
-          case 5:
-            _context5.next = 7;
-            return page.waitForTimeout(1000);
-
-          case 7:
-            _context5.next = 9;
-            return page.$('#filter_lnk_my_lnk');
-
-          case 9:
-            linkToBtn = _context5.sent;
-            linkToBtn.click();
-
-          case 11:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5);
-  }));
-  return _toQuestionPage.apply(this, arguments);
-}
 
 var initAccount = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(account) {
@@ -69,7 +25,7 @@ var initAccount = /*#__PURE__*/function () {
           case 0:
             return _context4.abrupt("return", new Promise( /*#__PURE__*/function () {
               var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(resolve, reject) {
-                var browser, questionData, page, loginInput, loginPassword, loginSubmitBtn, boardBtn, boardList, linkList, i, data, hasBoard, reg, mat, str, params, respone, jsonData;
+                var browser, questionData, page, loginInput, loginPassword, loginSubmitBtn;
                 return _regenerator["default"].wrap(function _callee3$(_context3) {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
@@ -113,36 +69,59 @@ var initAccount = /*#__PURE__*/function () {
                             }, _callee);
                           }));
 
-                          return function (_x5) {
+                          return function (_x4) {
                             return _ref3.apply(this, arguments);
                           };
                         }());
                         page.on('response', /*#__PURE__*/function () {
                           var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(res) {
+                            var key;
                             return _regenerator["default"].wrap(function _callee2$(_context2) {
                               while (1) {
                                 switch (_context2.prev = _context2.next) {
                                   case 0:
-                                    if (!(res.url().indexOf(questionUrl) !== -1)) {
+                                    _context2.t0 = _regenerator["default"].keys(_watchRespose["default"]);
+
+                                  case 1:
+                                    if ((_context2.t1 = _context2.t0()).done) {
                                       _context2.next = 7;
                                       break;
                                     }
 
-                                    _context2.next = 3;
-                                    return res.json();
+                                    key = _context2.t1.value;
 
-                                  case 3:
-                                    questionData = _context2.sent;
-                                    _context2.next = 6;
-                                    return browser.close();
+                                    if (!(res.url().indexOf(key) !== -1)) {
+                                      _context2.next = 5;
+                                      break;
+                                    }
 
-                                  case 6:
-                                    resolve(questionData);
+                                    return _context2.abrupt("return", _watchRespose["default"][key](res, page, account, browser, resolve, reject));
+
+                                  case 5:
+                                    _context2.next = 1;
+                                    break;
 
                                   case 7:
+                                    if (!(res.url().indexOf(questionUrl) !== -1)) {
+                                      _context2.next = 14;
+                                      break;
+                                    }
+
+                                    _context2.next = 10;
+                                    return res.json();
+
+                                  case 10:
+                                    questionData = _context2.sent;
+                                    _context2.next = 13;
+                                    return browser.close();
+
+                                  case 13:
+                                    resolve(questionData);
+
+                                  case 14:
                                     return _context2.abrupt("return", res);
 
-                                  case 8:
+                                  case 15:
                                   case "end":
                                     return _context2.stop();
                                 }
@@ -150,7 +129,7 @@ var initAccount = /*#__PURE__*/function () {
                             }, _callee2);
                           }));
 
-                          return function (_x6) {
+                          return function (_x5) {
                             return _ref4.apply(this, arguments);
                           };
                         }()); // 跳转界面
@@ -189,139 +168,27 @@ var initAccount = /*#__PURE__*/function () {
                         return loginSubmitBtn.click();
 
                       case 31:
-                        _context3.next = 33;
-                        return page.waitForTimeout(account.delay);
+                        _context3.next = 38;
+                        break;
 
                       case 33:
-                        _context3.next = 35;
-                        return page.$('#greenhopper_menu');
-
-                      case 35:
-                        boardBtn = _context3.sent;
-                        _context3.next = 38;
-                        return page.screenshot({
-                          path: _path["default"].resolve(__dirname, '../account.png')
-                        });
-
-                      case 38:
-                        if (!(account.designatedBoard.trim().toLocaleLowerCase() === _constants.BoardBug)) {
-                          _context3.next = 42;
-                          break;
-                        }
-
-                        _context3.next = 41;
-                        return toQuestionPage(page);
-
-                      case 41:
-                        return _context3.abrupt("return");
-
-                      case 42:
-                        _context3.next = 44;
-                        return boardBtn.click();
-
-                      case 44:
-                        // 获取面板下拉数据   ----- 面板
-                        boardList = []; // 等待2秒 跳转需要时间
-
-                        _context3.next = 47;
-                        return page.waitForTimeout(1000);
-
-                      case 47:
-                        _context3.next = 49;
-                        return page.$$('#greenhopper_menu_dropdown_recent .aui-list-truncate li');
-
-                      case 49:
-                        linkList = _context3.sent;
-                        i = 0;
-
-                      case 51:
-                        if (!(i < linkList.length)) {
-                          _context3.next = 59;
-                          break;
-                        }
-
-                        _context3.next = 54;
-                        return linkList[i].$eval('a', function (el) {
-                          var href = el.getAttribute('href'); // 获取所有的信息
-
-                          // 获取所有的信息
-                          return {
-                            originHref: 'http://jira.taimei.com' + href,
-                            innerHTML: el.innerHTML,
-                            id: el.getAttribute('id')
-                          };
-                        });
-
-                      case 54:
-                        data = _context3.sent;
-                        boardList.push(data);
-
-                      case 56:
-                        i++;
-                        _context3.next = 51;
-                        break;
-
-                      case 59:
-                        hasBoard = boardList.filter(function (item) {
-                          var text = item.innerHTML;
-
-                          if (text.trim() === account.designatedBoard.trim()) {
-                            return item;
-                          }
-                        });
-
-                        if (!hasBoard.length) {
-                          _context3.next = 76;
-                          break;
-                        }
-
-                        reg = new RegExp("rapidView=([^&?]*)", "ig");
-                        mat = reg.exec(hasBoard[0].originHref);
-                        str = mat ? mat[1] : '';
-                        params = '?rapidViewId=' + str;
-                        _context3.next = 67;
-                        return page["goto"](getListUrl + params);
-
-                      case 67:
-                        respone = _context3.sent;
-                        _context3.next = 70;
-                        return respone.json();
-
-                      case 70:
-                        jsonData = _context3.sent;
-                        _context3.next = 73;
-                        return browser.close();
-
-                      case 73:
-                        resolve(jsonData);
-                        _context3.next = 77;
-                        break;
-
-                      case 76:
-                        throw new Error('你没有相关的看板内容====' + account.designatedBoard.trim() + ',请重新选择看板');
-
-                      case 77:
-                        _context3.next = 84;
-                        break;
-
-                      case 79:
-                        _context3.prev = 79;
+                        _context3.prev = 33;
                         _context3.t0 = _context3["catch"](3);
-                        _context3.next = 83;
+                        _context3.next = 37;
                         return browser.close();
 
-                      case 83:
+                      case 37:
                         reject(_context3.t0);
 
-                      case 84:
+                      case 38:
                       case "end":
                         return _context3.stop();
                     }
                   }
-                }, _callee3, null, [[3, 79]]);
+                }, _callee3, null, [[3, 33]]);
               }));
 
-              return function (_x3, _x4) {
+              return function (_x2, _x3) {
                 return _ref2.apply(this, arguments);
               };
             }()));
@@ -334,7 +201,7 @@ var initAccount = /*#__PURE__*/function () {
     }, _callee4);
   }));
 
-  return function initAccount(_x2) {
+  return function initAccount(_x) {
     return _ref.apply(this, arguments);
   };
 }();
