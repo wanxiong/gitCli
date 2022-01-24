@@ -32,7 +32,7 @@ var initAccount = /*#__PURE__*/function () {
                       case 0:
                         _context3.next = 2;
                         return _puppeteer["default"].launch({
-                          headless: true,
+                          headless: false,
                           defaultViewport: {
                             width: 1280,
                             height: 800
@@ -84,44 +84,48 @@ var initAccount = /*#__PURE__*/function () {
 
                                   case 1:
                                     if ((_context2.t1 = _context2.t0()).done) {
-                                      _context2.next = 7;
+                                      _context2.next = 9;
                                       break;
                                     }
 
                                     key = _context2.t1.value;
 
                                     if (!(res.url().indexOf(key) !== -1)) {
-                                      _context2.next = 5;
+                                      _context2.next = 7;
                                       break;
                                     }
 
-                                    return _context2.abrupt("return", _watchRespose["default"][key](res, page, account, browser, resolve, reject));
+                                    _context2.next = 6;
+                                    return _watchRespose["default"][key](res, page, account, browser, resolve, reject);
 
-                                  case 5:
+                                  case 6:
+                                    return _context2.abrupt("return", _context2.sent);
+
+                                  case 7:
                                     _context2.next = 1;
                                     break;
 
-                                  case 7:
+                                  case 9:
                                     if (!(res.url().indexOf(questionUrl) !== -1)) {
-                                      _context2.next = 14;
+                                      _context2.next = 16;
                                       break;
                                     }
 
-                                    _context2.next = 10;
+                                    _context2.next = 12;
                                     return res.json();
 
-                                  case 10:
+                                  case 12:
                                     questionData = _context2.sent;
-                                    _context2.next = 13;
+                                    _context2.next = 15;
                                     return browser.close();
 
-                                  case 13:
+                                  case 15:
                                     resolve(questionData);
 
-                                  case 14:
+                                  case 16:
                                     return _context2.abrupt("return", res);
 
-                                  case 15:
+                                  case 17:
                                   case "end":
                                     return _context2.stop();
                                 }

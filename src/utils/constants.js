@@ -57,4 +57,6 @@ export const scopes = [
   { name: 'form-react' },
   { name: 'form-request'  },
   { name: 'form-stager'  },
+  { name: 'ethunder' },
+  { name: 'pms' },
 ]

@@ -8,11 +8,12 @@ export const initAccount = async function (account) {
     return new Promise(async (resolve, reject) => {
         // 启动浏览器
         const browser = await puppeteer.launch({
-            headless: true,
+            headless: false,
             defaultViewport: {
                 width: 1280,
                 height: 800,
             }
+
         })
         try {
             let questionData = {}
@@ -25,7 +26,7 @@ export const initAccount = async function (account) {
             page.on('response', async res => {
                 for (let key in watchRespone) {
                     if (res.url().indexOf(key) !== -1) {
-                        return watchRespone[key](res, page, account, browser, resolve, reject)
+                        return await watchRespone[key](res, page, account, browser, resolve, reject)
                     }
                 }
                 if (res.url().indexOf(questionUrl) !== -1) {

@@ -96,7 +96,7 @@ function dashboardFn (respone, page, account, browser, resolve, reject) {
 // 登录接口
 async function  loginFn (respone, page, account, browser, resolve, reject) {
     const html = await respone.text()
-    if (html.indexOf(loginFail) !== '-1') {
+    if (html.indexOf(loginFail) !== -1) {
         browser.close();
         reject(`
         ${chalk.bgRed(`很抱歉, 您的用户名和密码不正确，请确认写入的账户配置是否正确`)}
@@ -108,6 +108,6 @@ async function  loginFn (respone, page, account, browser, resolve, reject) {
 }
 
 export default {
+    [loginUrl]: loginFn,
     [dashboard]: dashboardFn,
-    [loginUrl]: loginFn
 }

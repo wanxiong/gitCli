@@ -19,7 +19,7 @@ var _constants = require("./constants");
 
 var _chalk = _interopRequireDefault(require("chalk"));
 
-var _dashboard$loginUrl;
+var _loginUrl$dashboard;
 
 /**
  * 看板接口关键字-对应路径： http://jira.taimei.com/secure/Dashboard.jspa
@@ -227,7 +227,7 @@ function _loginFn() {
           case 2:
             html = _context3.sent;
 
-            if (html.indexOf(loginFail) !== '-1') {
+            if (html.indexOf(loginFail) !== -1) {
               browser.close();
               reject("\n        ".concat(_chalk["default"].bgRed("\u5F88\u62B1\u6B49, \u60A8\u7684\u7528\u6237\u540D\u548C\u5BC6\u7801\u4E0D\u6B63\u786E\uFF0C\u8BF7\u786E\u8BA4\u5199\u5165\u7684\u8D26\u6237\u914D\u7F6E\u662F\u5426\u6B63\u786E"), "\n        ").concat(_chalk["default"].yellowBright('你可以执行命令：')).concat(_chalk["default"].cyanBright('mdmGit init'), "\n        \u91CD\u7F6E\u6210\u65B0\u7684\u914D\u7F6E\n        "));
             }
@@ -244,6 +244,6 @@ function _loginFn() {
   return _loginFn.apply(this, arguments);
 }
 
-var _default = (_dashboard$loginUrl = {}, (0, _defineProperty2["default"])(_dashboard$loginUrl, dashboard, dashboardFn), (0, _defineProperty2["default"])(_dashboard$loginUrl, loginUrl, loginFn), _dashboard$loginUrl);
+var _default = (_loginUrl$dashboard = {}, (0, _defineProperty2["default"])(_loginUrl$dashboard, loginUrl, loginFn), (0, _defineProperty2["default"])(_loginUrl$dashboard, dashboard, dashboardFn), _loginUrl$dashboard);
 
 exports["default"] = _default;

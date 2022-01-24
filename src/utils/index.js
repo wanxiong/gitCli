@@ -80,6 +80,7 @@ export const writeData = async (fileData, designatedBoard, localConfig) => {
     spinner.start('获取关联的jira账号');
     try {
         let type = designatedBoard || localConfig.Board || defaultBoard
+
         const data = await initAccount({
             name: fileData.name,
             password: fileData.password,
