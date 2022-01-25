@@ -38,7 +38,7 @@ var initAccount = /*#__PURE__*/function () {
                       case 0:
                         _context3.next = 2;
                         return _puppeteer["default"].launch({
-                          headless: false,
+                          headless: true,
                           defaultViewport: {
                             width: 1280,
                             height: 800

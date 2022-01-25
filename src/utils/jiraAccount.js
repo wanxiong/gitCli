@@ -8,7 +8,7 @@ export const initAccount = async function (account) {
     return new Promise(async (resolve, reject) => {
         // 启动浏览器
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             defaultViewport: {
                 width: 1280,
                 height: 800,
