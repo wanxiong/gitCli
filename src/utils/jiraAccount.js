@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer'
 
-import watchRespone from './watchRespose'
+import watchRespone, { loginFn } from './watchRespose'
 
 const questionUrl = 'http://jira.taimei.com/rest/issueNav/1/issueTable'
 
@@ -23,6 +23,7 @@ export const initAccount = async function (account) {
             page.on('request', async req => {
                 req.continue({})
             })
+
             page.on('response', async res => {
                 for (let key in watchRespone) {
                     if (res.url().indexOf(key) !== -1) {
@@ -50,6 +51,9 @@ export const initAccount = async function (account) {
             await page.keyboard.type(account.password)
             //点击按钮
             await loginSubmitBtn.click()
+            // 500毫秒认为结束
+            let response = await page.waitForNavigation({ waitUntil: 'networkidle0' })
+            await loginFn(response, browser, reject)
             // 获取数据
         } catch (error) {
             await browser.close();

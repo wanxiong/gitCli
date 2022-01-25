@@ -1,6 +1,7 @@
 import path from 'path'
 import { BoardBug }from './constants'
 import chalk from 'chalk';
+import { cloneDeep } from 'lodash'
 /**
  * 看板接口关键字-对应路径： http://jira.taimei.com/secure/Dashboard.jspa
  */
@@ -33,7 +34,7 @@ async function toQuestionPage (page) {
 function dashboardFn (respone, page, account, browser, resolve, reject) {
     Promise.resolve().then(async () => {
         // 等待2秒 跳转需要时间
-        await page.waitForTimeout(account.delay);
+        // await page.waitForTimeout(account.delay);
          // 得到看板按钮
          const boardBtn = await page.$('#greenhopper_menu');
          await page.screenshot({
@@ -94,8 +95,9 @@ function dashboardFn (respone, page, account, browser, resolve, reject) {
 
 
 // 登录接口
-async function  loginFn (respone, page, account, browser, resolve, reject) {
-    const html = await respone.text()
+export async function  loginFn (respone, browser, reject) {
+    let html = await respone.text()
+        
     if (html.indexOf(loginFail) !== -1) {
         browser.close();
         reject(`
@@ -103,11 +105,11 @@ async function  loginFn (respone, page, account, browser, resolve, reject) {
         ${chalk.yellowBright('你可以执行命令：')}${chalk.cyanBright('mdmGit init')}
         重置成新的配置
         `)
-    }
+    }  
+   
     return respone
 }
 
 export default {
-    [loginUrl]: loginFn,
     [dashboard]: dashboardFn,
 }

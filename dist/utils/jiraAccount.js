@@ -2,6 +2,8 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _typeof = require("@babel/runtime/helpers/typeof");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -13,7 +15,11 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _puppeteer = _interopRequireDefault(require("puppeteer"));
 
-var _watchRespose = _interopRequireDefault(require("./watchRespose"));
+var _watchRespose = _interopRequireWildcard(require("./watchRespose"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var questionUrl = 'http://jira.taimei.com/rest/issueNav/1/issueTable';
 
@@ -25,7 +31,7 @@ var initAccount = /*#__PURE__*/function () {
           case 0:
             return _context4.abrupt("return", new Promise( /*#__PURE__*/function () {
               var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(resolve, reject) {
-                var browser, questionData, page, loginInput, loginPassword, loginSubmitBtn;
+                var browser, questionData, page, loginInput, loginPassword, loginSubmitBtn, response;
                 return _regenerator["default"].wrap(function _callee3$(_context3) {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
@@ -172,24 +178,35 @@ var initAccount = /*#__PURE__*/function () {
                         return loginSubmitBtn.click();
 
                       case 31:
-                        _context3.next = 38;
-                        break;
+                        _context3.next = 33;
+                        return page.waitForNavigation({
+                          waitUntil: 'networkidle0'
+                        });
 
                       case 33:
-                        _context3.prev = 33;
-                        _context3.t0 = _context3["catch"](3);
-                        _context3.next = 37;
-                        return browser.close();
+                        response = _context3.sent;
+                        _context3.next = 36;
+                        return (0, _watchRespose.loginFn)(response, browser, reject);
 
-                      case 37:
-                        reject(_context3.t0);
+                      case 36:
+                        _context3.next = 43;
+                        break;
 
                       case 38:
+                        _context3.prev = 38;
+                        _context3.t0 = _context3["catch"](3);
+                        _context3.next = 42;
+                        return browser.close();
+
+                      case 42:
+                        reject(_context3.t0);
+
+                      case 43:
                       case "end":
                         return _context3.stop();
                     }
                   }
-                }, _callee3, null, [[3, 33]]);
+                }, _callee3, null, [[3, 38]]);
               }));
 
               return function (_x2, _x3) {

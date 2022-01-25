@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+exports.loginFn = loginFn;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -19,7 +20,7 @@ var _constants = require("./constants");
 
 var _chalk = _interopRequireDefault(require("chalk"));
 
-var _loginUrl$dashboard;
+var _lodash = require("lodash");
 
 /**
  * 看板接口关键字-对应路径： http://jira.taimei.com/secure/Dashboard.jspa
@@ -88,57 +89,53 @@ function dashboardFn(respone, page, account, browser, resolve, reject) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return page.waitForTimeout(account.delay);
-
-          case 2:
-            _context.next = 4;
             return page.$('#greenhopper_menu');
 
-          case 4:
+          case 2:
             boardBtn = _context.sent;
-            _context.next = 7;
+            _context.next = 5;
             return page.screenshot({
               path: _path["default"].resolve(__dirname, '../account.png')
             });
 
-          case 7:
+          case 5:
             if (!(account.designatedBoard.trim().toLocaleLowerCase() === _constants.BoardBug)) {
-              _context.next = 11;
+              _context.next = 9;
               break;
             }
 
-            _context.next = 10;
+            _context.next = 8;
             return toQuestionPage(page);
 
-          case 10:
+          case 8:
             return _context.abrupt("return");
 
-          case 11:
-            _context.next = 13;
+          case 9:
+            _context.next = 11;
             return boardBtn.click();
 
-          case 13:
+          case 11:
             // 获取面板下拉数据   ----- 面板
             boardList = []; // 等待2秒 跳转需要时间
 
-            _context.next = 16;
+            _context.next = 14;
             return page.waitForTimeout(1000);
 
-          case 16:
-            _context.next = 18;
+          case 14:
+            _context.next = 16;
             return page.$$('#greenhopper_menu_dropdown_recent .aui-list-truncate li');
 
-          case 18:
+          case 16:
             linkList = _context.sent;
             i = 0;
 
-          case 20:
+          case 18:
             if (!(i < linkList.length)) {
-              _context.next = 28;
+              _context.next = 26;
               break;
             }
 
-            _context.next = 23;
+            _context.next = 21;
             return linkList[i].$eval('a', function (el) {
               var href = el.getAttribute('href'); // 获取所有的信息
 
@@ -150,16 +147,16 @@ function dashboardFn(respone, page, account, browser, resolve, reject) {
               };
             });
 
-          case 23:
+          case 21:
             data = _context.sent;
             boardList.push(data);
 
-          case 25:
+          case 23:
             i++;
-            _context.next = 20;
+            _context.next = 18;
             break;
 
-          case 28:
+          case 26:
             hasBoard = boardList.filter(function (item) {
               var text = item.innerHTML;
 
@@ -169,7 +166,7 @@ function dashboardFn(respone, page, account, browser, resolve, reject) {
             });
 
             if (!hasBoard.length) {
-              _context.next = 44;
+              _context.next = 42;
               break;
             }
 
@@ -177,25 +174,25 @@ function dashboardFn(respone, page, account, browser, resolve, reject) {
             mat = reg.exec(hasBoard[0].originHref);
             str = mat ? mat[1] : '';
             params = '?rapidViewId=' + str;
-            _context.next = 36;
+            _context.next = 34;
             return page["goto"](getListUrl + params);
 
-          case 36:
+          case 34:
             _respone = _context.sent;
-            _context.next = 39;
+            _context.next = 37;
             return _respone.json();
 
-          case 39:
+          case 37:
             jsonData = _context.sent;
             browser.close();
             resolve(jsonData);
-            _context.next = 45;
+            _context.next = 43;
             break;
 
-          case 44:
+          case 42:
             throw new Error('你没有相关的看板内容====' + account.designatedBoard.trim() + ',请重新选择看板');
 
-          case 45:
+          case 43:
           case "end":
             return _context.stop();
         }
@@ -210,12 +207,12 @@ function dashboardFn(respone, page, account, browser, resolve, reject) {
 } // 登录接口
 
 
-function loginFn(_x2, _x3, _x4, _x5, _x6, _x7) {
+function loginFn(_x2, _x3, _x4) {
   return _loginFn.apply(this, arguments);
 }
 
 function _loginFn() {
-  _loginFn = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(respone, page, account, browser, resolve, reject) {
+  _loginFn = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(respone, browser, reject) {
     var html;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
@@ -244,6 +241,6 @@ function _loginFn() {
   return _loginFn.apply(this, arguments);
 }
 
-var _default = (_loginUrl$dashboard = {}, (0, _defineProperty2["default"])(_loginUrl$dashboard, loginUrl, loginFn), (0, _defineProperty2["default"])(_loginUrl$dashboard, dashboard, dashboardFn), _loginUrl$dashboard);
+var _default = (0, _defineProperty2["default"])({}, dashboard, dashboardFn);
 
 exports["default"] = _default;
