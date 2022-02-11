@@ -39,6 +39,14 @@ export const typeList = [
       {
         value: 'perf',
         name: 'perf: 优化相关，比如提升性能、体验',
+      },
+      {
+        value: 'build',
+        name: 'build: 影响构建系统或外部依赖项的更改',
+      },
+      {
+        value: 'revert',
+        name: 'revert: 版本回滚',
       }
 ]
 
